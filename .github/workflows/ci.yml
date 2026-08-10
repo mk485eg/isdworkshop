@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: ma_transport
+          POSTGRES_PASSWORD: ma_transport_pw
+          POSTGRES_DB: ma_transport_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ma_transport"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DATABASE_URL: postgresql://ma_transport:ma_transport_pw@localhost:5432/ma_transport_test
+      JWT_SECRET: ci-test-secret-not-for-production-use-only
+      JWT_EXPIRES_IN: 1d
+      PORT: 3000
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Run database migrations
+        run: npx prisma migrate deploy
+
+      - name: Type-check and build
+        run: npm run build
+
+      - name: Write .env.test for test runner
+        run: |
+          cat > .env.test <<EOF
+          DATABASE_URL=${DATABASE_URL}
+          JWT_SECRET=${JWT_SECRET}
+          JWT_EXPIRES_IN=${JWT_EXPIRES_IN}
+          PORT=${PORT}
+          EOF
+
+      - name: Run tests
+        run: npm test
