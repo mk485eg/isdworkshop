@@ -1,0 +1,154 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  DISPATCHER
+}
+
+enum DriverStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum VehicleStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum JobStatus {
+  PENDING
+  ASSIGNED
+  ACCEPTED
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum NotificationType {
+  JOB_ASSIGNED
+  JOB_ACCEPTED
+  JOB_STARTED
+  JOB_COMPLETED
+  JOB_FAILED
+  JOB_CANCELLED
+}
+
+model Company {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  phone     String?
+  address   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users         User[]
+  drivers       Driver[]
+  vehicles      Vehicle[]
+  jobs          Job[]
+  notifications Notification[]
+}
+
+model User {
+  id           String   @id @default(uuid())
+  companyId    String
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         Role     @default(ADMIN)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+}
+
+model Driver {
+  id            String       @id @default(uuid())
+  companyId     String
+  name          String
+  phone         String
+  email         String?
+  licenseNumber String
+  status        DriverStatus @default(ACTIVE)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  jobs    Job[]
+
+  @@index([companyId])
+  @@unique([companyId, licenseNumber])
+}
+
+model Vehicle {
+  id                  String        @id @default(uuid())
+  companyId           String
+  registrationNumber  String
+  make                String
+  model               String
+  capacity            Int
+  status              VehicleStatus @default(ACTIVE)
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  jobs    Job[]
+
+  @@index([companyId])
+  @@unique([companyId, registrationNumber])
+}
+
+model Job {
+  id              String    @id @default(uuid())
+  companyId       String
+  reference       String
+  pickupLocation  String
+  dropoffLocation String
+  scheduledAt     DateTime
+  notes           String?
+  status          JobStatus @default(PENDING)
+  driverId        String?
+  vehicleId       String?
+  startedAt       DateTime?
+  completedAt     DateTime?
+  cancelledAt     DateTime?
+  failureReason   String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  company       Company        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  driver        Driver?        @relation(fields: [driverId], references: [id])
+  vehicle       Vehicle?       @relation(fields: [vehicleId], references: [id])
+  notifications Notification[]
+
+  @@index([companyId])
+  @@index([driverId])
+  @@index([vehicleId])
+  @@unique([companyId, reference])
+}
+
+model Notification {
+  id        String           @id @default(uuid())
+  companyId String
+  jobId     String?
+  type      NotificationType
+  message   String
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  job     Job?    @relation(fields: [jobId], references: [id])
+
+  @@index([companyId])
+  @@index([companyId, isRead])
+}
