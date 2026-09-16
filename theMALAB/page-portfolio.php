@@ -42,8 +42,14 @@ $categories = array_keys($categories);
     <div class="portfolio-full-grid" id="portfolio-full-grid">
       <?php foreach ($items as $item) :
         $cat_slug = sanitize_title(wp_strip_all_tags($item['category']));
+        $link     = malab_portfolio_link($item);
+        $label    = malab_portfolio_link_label($item);
       ?>
-        <a class="portfolio-card fade-up" href="<?php echo esc_url($item['url']); ?>" target="_blank" rel="noopener" data-category="<?php echo esc_attr($cat_slug); ?>">
+        <?php if ($link) : ?>
+        <a class="portfolio-card fade-up" href="<?php echo esc_url($link); ?>" target="_blank" rel="noopener" data-category="<?php echo esc_attr($cat_slug); ?>">
+        <?php else : ?>
+        <div class="portfolio-card portfolio-card-static fade-up" data-category="<?php echo esc_attr($cat_slug); ?>">
+        <?php endif; ?>
           <div class="portfolio-card-media<?php echo $item['image'] ? '' : ' no-image'; ?>"
                <?php if (!$item['image']) : ?>style="background:linear-gradient(135deg, <?php echo esc_attr($item['accent']); ?> 0%, var(--color-surface-high) 100%);"<?php endif; ?>>
             <?php if ($item['image']) : ?>
@@ -56,9 +62,9 @@ $categories = array_keys($categories);
             <p class="portfolio-card-tag"><?php echo wp_kses_post($item['category']); ?></p>
             <h3 class="portfolio-card-title"><?php echo esc_html($item['name']); ?></h3>
             <p class="portfolio-card-desc"><?php echo wp_kses_post($item['desc']); ?></p>
-            <span class="portfolio-card-link">View Live Site <span class="chevron">&rsaquo;</span></span>
+            <span class="portfolio-card-link"><?php echo esc_html($label); ?><?php if ($link) : ?> <span class="chevron">&rsaquo;</span><?php endif; ?></span>
           </div>
-        </a>
+        <?php if ($link) : ?></a><?php else : ?></div><?php endif; ?>
       <?php endforeach; ?>
     </div>
   </div>

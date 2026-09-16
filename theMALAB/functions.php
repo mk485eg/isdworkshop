@@ -293,12 +293,12 @@ add_filter('excerpt_more', 'malab_excerpt_more');
    ============================================================ */
 function malab_portfolio_items(): array {
     $uri = get_template_directory_uri() . '/assets/images/portfolio/';
-    // Base URL for hosted project demos. Was hardcoded to a local dev
-    // address (http://localhost/...) which 404s for every visitor on a
-    // live site. Defaults to this site's own domain; define
-    // MALAB_PROJECTS_BASE_URL in wp-config.php to point elsewhere
-    // (e.g. a subdomain used to host the client demo builds).
-    $proj = defined('MALAB_PROJECTS_BASE_URL') ? MALAB_PROJECTS_BASE_URL : home_url('/malab-projects/');
+    // 'url' is only for a project that is actually deployed somewhere live —
+    // leave it null until there's a real URL to put here. These previously
+    // all pointed at a local dev path (http://localhost/malab-projects/...)
+    // that was never uploaded anywhere, so every card 404'd for every
+    // visitor. Once a project has a real hosted URL, set 'url' to it and
+    // the card will link straight out to it.
     return [
         [
             'slug'     => 'sparklepro-cleaning',
@@ -307,7 +307,7 @@ function malab_portfolio_items(): array {
             'desc'     => 'A 10-page residential & commercial cleaning services site with trust badges, service breakdowns, and online booking positioning.',
             'image'    => $uri . 'sparklepro-cleaning.png',
             'accent'   => '#00c2a8',
-            'url'      => $proj . 'sparklepro-cleaning/screens/home.html',
+            'url'      => null,
         ],
         [
             'slug'     => 'cleanora-cleaning',
@@ -316,7 +316,7 @@ function malab_portfolio_items(): array {
             'desc'     => 'An alternate cleaning-brand concept — "A Cleaner Space. A Better Day." — with quote requests and WhatsApp-first contact.',
             'image'    => null,
             'accent'   => '#00685f',
-            'url'      => $proj . 'cleanora-cleaning/cleanora-home.html',
+            'url'      => null,
         ],
         [
             'slug'     => 'volt-line-electrical',
@@ -325,7 +325,7 @@ function malab_portfolio_items(): array {
             'desc'     => 'A licensed residential & commercial electrical contractor site with 24/7 emergency service positioning.',
             'image'    => null,
             'accent'   => '#ff6a00',
-            'url'      => $proj . 'volt-line-electrical/home.html',
+            'url'      => null,
         ],
         [
             'slug'     => 'studio-nova',
@@ -334,7 +334,7 @@ function malab_portfolio_items(): array {
             'desc'     => 'A bold, editorial freelance graphic designer portfolio — branding, logo, print &amp; packaging, and digital design work.',
             'image'    => null,
             'accent'   => '#ff4e1f',
-            'url'      => $proj . 'studio-nova/index.html',
+            'url'      => null,
         ],
         [
             'slug'     => 'greenscape-landscaping',
@@ -343,7 +343,7 @@ function malab_portfolio_items(): array {
             'desc'     => 'Premium Australian landscape design &amp; outdoor living — architectural photography, before/after gallery, service areas.',
             'image'    => null,
             'accent'   => '#2f7a4d',
-            'url'      => $proj . 'greenscape-landscaping/screens/home.html',
+            'url'      => null,
         ],
         [
             'slug'     => 'hpainter-studio',
@@ -352,7 +352,7 @@ function malab_portfolio_items(): array {
             'desc'     => 'An artist &amp; muralist atelier site — fine art gallery, studio story, and commission enquiries.',
             'image'    => $uri . 'hpainter-studio.png',
             'accent'   => '#b5622e',
-            'url'      => $proj . 'hpainter-studio/screens/home.html',
+            'url'      => null,
         ],
         [
             'slug'     => 'sophia-personal-trainer',
@@ -361,7 +361,7 @@ function malab_portfolio_items(): array {
             'desc'     => 'A bold, energetic fitness coaching site built to convert visitors into strength-training clients.',
             'image'    => $uri . 'sophia-personal-trainer.png',
             'accent'   => '#c6ff3d',
-            'url'      => $proj . 'sophia-personal-trainer/home.html',
+            'url'      => null,
         ],
         [
             'slug'     => 'morano-builder',
@@ -370,9 +370,25 @@ function malab_portfolio_items(): array {
             'desc'     => 'A design-build/construction company site — custom homes &amp; renovations, grounded in modern architectural photography.',
             'image'    => $uri . 'morano-builder.png',
             'accent'   => '#9c6b43',
-            'url'      => $proj . 'morano-builder/screens/home.html',
+            'url'      => null,
         ],
     ];
+}
+
+/**
+ * Best available link for a portfolio card: a real deployed URL if one is
+ * set, otherwise the bundled preview screenshot, otherwise none at all.
+ * Never falls back to a guessed path that isn't guaranteed to exist —
+ * that's what caused every project card to 404.
+ */
+function malab_portfolio_link( array $item ): ?string {
+    return $item['url'] ?: $item['image'] ?: null;
+}
+
+function malab_portfolio_link_label( array $item ): string {
+    if ( $item['url'] )   return 'View Live Site';
+    if ( $item['image'] ) return 'View Preview';
+    return 'Case Study Coming Soon';
 }
 
 /* ============================================================

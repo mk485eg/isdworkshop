@@ -220,8 +220,14 @@
     </div>
 
     <div class="portfolio-preview-grid">
-      <?php foreach (array_slice(malab_portfolio_items(), 0, 4) as $item) : ?>
-        <a class="portfolio-card fade-up" href="<?php echo esc_url($item['url']); ?>" target="_blank" rel="noopener">
+      <?php foreach (array_slice(malab_portfolio_items(), 0, 4) as $item) :
+        $link = malab_portfolio_link($item);
+      ?>
+        <?php if ($link) : ?>
+        <a class="portfolio-card fade-up" href="<?php echo esc_url($link); ?>" target="_blank" rel="noopener">
+        <?php else : ?>
+        <div class="portfolio-card portfolio-card-static fade-up">
+        <?php endif; ?>
           <div class="portfolio-card-media<?php echo $item['image'] ? '' : ' no-image'; ?>"
                <?php if (!$item['image']) : ?>style="background:linear-gradient(135deg, <?php echo esc_attr($item['accent']); ?> 0%, var(--color-surface-high) 100%);"<?php endif; ?>>
             <?php if ($item['image']) : ?>
@@ -234,7 +240,7 @@
             <p class="portfolio-card-tag"><?php echo wp_kses_post($item['category']); ?></p>
             <h3 class="portfolio-card-title"><?php echo esc_html($item['name']); ?></h3>
           </div>
-        </a>
+        <?php if ($link) : ?></a><?php else : ?></div><?php endif; ?>
       <?php endforeach; ?>
     </div>
 
