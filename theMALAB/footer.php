@@ -13,24 +13,40 @@
           e-commerce stores, and digital systems for ambitious businesses.
         </p>
         <div class="footer-socials">
-          <a href="#" class="social-link" aria-label="Instagram">📸</a>
+          <?php if ( MALAB_INSTAGRAM_URL ) : ?>
+            <a href="<?php echo esc_url( MALAB_INSTAGRAM_URL ); ?>" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">📸</a>
+          <?php else : ?>
+            <span class="social-link social-link-disabled" aria-hidden="true">📸</span>
+          <?php endif; ?>
           <a href="https://www.facebook.com/themalab" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">📘</a>
           <a href="https://www.linkedin.com/company/10615030/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">💼</a>
-          <a href="#" class="social-link" aria-label="TikTok">🎵</a>
+          <?php if ( MALAB_TIKTOK_URL ) : ?>
+            <a href="<?php echo esc_url( MALAB_TIKTOK_URL ); ?>" target="_blank" rel="noopener" class="social-link" aria-label="TikTok">🎵</a>
+          <?php else : ?>
+            <span class="social-link social-link-disabled" aria-hidden="true">🎵</span>
+          <?php endif; ?>
           <a href="https://wa.me/61426623761" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">💬</a>
         </div>
       </div>
+
+      <?php
+      // Section anchors (#services, #contact, ...) only exist on the
+      // homepage. A bare "#services" href does nothing on any other page
+      // — always point through home_url() so these links work from
+      // anywhere on the site, not just while already on the homepage.
+      $home = home_url('/');
+      ?>
 
       <!-- Services -->
       <div class="footer-col">
         <p class="footer-col-title">Services</p>
         <ul class="footer-links">
-          <li><a href="#services">Web Design &amp; Dev</a></li>
-          <li><a href="#services">E-Commerce</a></li>
-          <li><a href="#services">Brand Identity</a></li>
-          <li><a href="#services">Restaurant Systems</a></li>
-          <li><a href="#services">SEO &amp; Growth</a></li>
-          <li><a href="#services">Social Media</a></li>
+          <li><a href="<?php echo esc_url($home . '#services'); ?>">Web Design &amp; Dev</a></li>
+          <li><a href="<?php echo esc_url($home . '#services'); ?>">E-Commerce</a></li>
+          <li><a href="<?php echo esc_url($home . '#services'); ?>">Brand Identity</a></li>
+          <li><a href="<?php echo esc_url($home . '#services'); ?>">Restaurant Systems</a></li>
+          <li><a href="<?php echo esc_url($home . '#services'); ?>">SEO &amp; Growth</a></li>
+          <li><a href="<?php echo esc_url($home . '#services'); ?>">Social Media</a></li>
         </ul>
       </div>
 
@@ -38,10 +54,10 @@
       <div class="footer-col">
         <p class="footer-col-title">Company</p>
         <ul class="footer-links">
-          <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#results">Results</a></li>
-          <li><a href="#testimonials">Client Stories</a></li>
-          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="<?php echo esc_url($home . '#how-it-works'); ?>">How It Works</a></li>
+          <li><a href="<?php echo esc_url($home . '#results'); ?>">Results</a></li>
+          <li><a href="<?php echo esc_url($home . '#testimonials'); ?>">Client Stories</a></li>
+          <li><a href="<?php echo esc_url($home . '#contact'); ?>">Contact Us</a></li>
           <li><a href="<?php echo esc_url(get_privacy_policy_url()); ?>">Privacy Policy</a></li>
         </ul>
       </div>
@@ -64,7 +80,7 @@
           </li>
         </ul>
         <div style="margin-top:24px;">
-          <a href="#contact" class="btn btn-primary" style="font-size:11px; padding: 12px 20px;">
+          <a href="<?php echo esc_url($home . '#contact'); ?>" class="btn btn-primary" style="font-size:11px; padding: 12px 20px;">
             Start a Project &rsaquo;
           </a>
         </div>
@@ -75,12 +91,12 @@
     <div class="footer-bottom">
       <p class="footer-copyright">
         &copy; <?php echo date('Y'); ?> MA LAB Digital Solutions. All rights reserved.
-        Built with &#10084; by <a href="#" style="color: var(--color-primary);">MA LAB</a>.
+        Built with &#10084; by <a href="<?php echo esc_url($home); ?>" style="color: var(--color-primary);">MA LAB</a>.
       </p>
       <nav class="footer-legal" aria-label="Legal navigation">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
+        <a href="<?php echo esc_url(get_privacy_policy_url()); ?>">Privacy Policy</a>
+        <a href="<?php echo esc_url(home_url('/terms-of-service/')); ?>">Terms of Service</a>
+        <a href="<?php echo esc_url(home_url('/cookie-policy/')); ?>">Cookie Policy</a>
       </nav>
     </div>
 

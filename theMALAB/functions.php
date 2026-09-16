@@ -12,6 +12,20 @@ if ( ! defined('MALAB_BUSINESS_EMAIL') ) {
 }
 
 /* ============================================================
+   SOCIAL LINKS
+   Instagram/TikTok had no real URL (just "#"), so the footer
+   rendered them as dead links. Define the real handles in
+   wp-config.php once you have them; until then the icons render
+   as non-clickable instead of pretending to link somewhere.
+   ============================================================ */
+if ( ! defined('MALAB_INSTAGRAM_URL') ) {
+    define('MALAB_INSTAGRAM_URL', '');
+}
+if ( ! defined('MALAB_TIKTOK_URL') ) {
+    define('MALAB_TIKTOK_URL', '');
+}
+
+/* ============================================================
    MA LAB THEME SETUP
    ============================================================ */
 function malab_setup() {
@@ -36,11 +50,12 @@ function malab_setup() {
 add_action('after_setup_theme', 'malab_setup');
 
 /* ============================================================
-   REQUIRED PAGES — auto-create Portfolio & Booking
+   REQUIRED PAGES — auto-create Portfolio, Booking & legal pages
    The header/hero links point to /portfolio/ and /booking/, which
    only resolve if a Page exists at that slug with the matching
-   page template assigned. Create (or repair) them automatically
-   so those links never 404.
+   page template assigned. The footer links to Terms of Service and
+   Cookie Policy the same way. Create (or repair) them all
+   automatically so none of these links ever 404.
    ============================================================ */
 function malab_create_required_pages() {
     $pages = [
@@ -52,6 +67,14 @@ function malab_create_required_pages() {
             'title'    => __('Booking', 'malab'),
             'template' => 'page-booking.php',
         ],
+        'terms-of-service' => [
+            'title'   => __('Terms of Service', 'malab'),
+            'content' => __('This page is a placeholder — add your actual terms of service.', 'malab'),
+        ],
+        'cookie-policy' => [
+            'title'   => __('Cookie Policy', 'malab'),
+            'content' => __('This page is a placeholder — add your actual cookie policy.', 'malab'),
+        ],
     ];
 
     foreach ( $pages as $slug => $data ) {
@@ -59,10 +82,11 @@ function malab_create_required_pages() {
 
         if ( ! $page ) {
             $page_id = wp_insert_post([
-                'post_title'  => $data['title'],
-                'post_name'   => $slug,
-                'post_status' => 'publish',
-                'post_type'   => 'page',
+                'post_title'   => $data['title'],
+                'post_name'    => $slug,
+                'post_status'  => 'publish',
+                'post_type'    => 'page',
+                'post_content' => $data['content'] ?? '',
             ]);
         } else {
             $page_id = $page->ID;
@@ -71,8 +95,25 @@ function malab_create_required_pages() {
             }
         }
 
-        if ( $page_id && ! is_wp_error( $page_id ) ) {
+        if ( $page_id && ! is_wp_error( $page_id ) && ! empty( $data['template'] ) ) {
             update_post_meta( $page_id, '_wp_page_template', $data['template'] );
+        }
+    }
+
+    // Register a Privacy Policy page with WordPress if one isn't set yet,
+    // so get_privacy_policy_url() (used in the footer) returns a real URL
+    // instead of an empty string.
+    if ( ! get_option( 'wp_page_for_privacy_policy' ) ) {
+        $privacy    = get_page_by_path( 'privacy-policy' );
+        $privacy_id = $privacy ? $privacy->ID : wp_insert_post([
+            'post_title'   => __('Privacy Policy', 'malab'),
+            'post_name'    => 'privacy-policy',
+            'post_status'  => 'publish',
+            'post_type'    => 'page',
+            'post_content' => __('This page is a placeholder — add your actual privacy policy.', 'malab'),
+        ]);
+        if ( $privacy_id && ! is_wp_error( $privacy_id ) ) {
+            update_option( 'wp_page_for_privacy_policy', $privacy_id );
         }
     }
 }

@@ -1186,6 +1186,11 @@ input, textarea, select { font-family: inherit; }
   transform: translateY(-3px);
 }
 
+.social-link-disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
 .footer-col-title {
   font-family: var(--font-headline);
   font-size: var(--text-xs);

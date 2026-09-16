@@ -22,13 +22,20 @@
       MA<em class="chevron">&gt;</em>LAB
     </a>
 
+    <?php
+    // Section anchors (#services, #contact, ...) only exist on the
+    // homepage. A bare "#services" href does nothing on any other page
+    // (nothing on that page matches the fragment) — always point through
+    // home_url() so these links work from anywhere on the site.
+    $home = home_url('/');
+    ?>
     <nav class="nav-links" id="primary-nav" aria-label="Primary navigation">
-      <a href="#services">Services</a>
+      <a href="<?php echo esc_url($home . '#services'); ?>">Services</a>
       <a href="<?php echo esc_url(home_url('/portfolio/')); ?>">Portfolio</a>
-      <a href="#how-it-works">How It Works</a>
-      <a href="#results">Results</a>
-      <a href="#testimonials">Clients</a>
-      <a href="#contact">Contact</a>
+      <a href="<?php echo esc_url($home . '#how-it-works'); ?>">How It Works</a>
+      <a href="<?php echo esc_url($home . '#results'); ?>">Results</a>
+      <a href="<?php echo esc_url($home . '#testimonials'); ?>">Clients</a>
+      <a href="<?php echo esc_url($home . '#contact'); ?>">Contact</a>
     </nav>
 
     <a href="<?php echo esc_url(home_url('/booking/')); ?>" class="btn btn-primary nav-cta">
