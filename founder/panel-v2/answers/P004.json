@@ -1,0 +1,13 @@
+{
+  "id": "P004",
+  "buys": true,
+  "purchases_first_month": 1,
+  "reason_code": "convenience",
+  "reason": "I'm adding vehicles and taking booking calls from the driver's seat, so enquiry-to-Xero in one place with clash and expiry warnings is exactly where my admin is breaking. With them moving my data in for free and a 60-day money-back, about A$125 a month is a cheap bet to find out.",
+  "objection": "Coach Manager and my telematics already cover half of this, and you're a brand-new company with zero customers. If you fold or the driver app is flaky on a Saturday wedding run, I'm the one stuck sorting it out.",
+  "would_change_my_mind": "If the import of my bookings and vehicles comes out messy, or I can't speak to an actual person when something breaks mid-run, I'd ask for the refund and go back.",
+  "price_too_cheap": 40,
+  "price_cheap": 99,
+  "price_expensive": 220,
+  "price_too_expensive": 320
+}

@@ -1,0 +1,13 @@
+{
+  "id": "P016",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "Excel, the whiteboard and Xero run my bookings fine, and I've never paid for operations software. Over A$400 a month, even with the discount, from a company with no customers, and a migration in the middle of excursion and end-of-year season? That's a no for me.",
+  "objection": "Nobody has used it yet. I'm not handing my bookings and driver rosters to a brand-new company and trusting it not to drop a job on a busy Friday, refund or no refund.",
+  "would_change_my_mind": "Seeing it run for a few months at another coach operator my size that I can actually ring, with the switchover done in the quiet months and not in peak season.",
+  "price_too_cheap": 50,
+  "price_cheap": 150,
+  "price_expensive": 300,
+  "price_too_expensive": 450
+}

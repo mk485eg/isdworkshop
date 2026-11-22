@@ -1,0 +1,13 @@
+{
+  "id": "P009",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "I've already got a charter system with years of bookings, customers and driver records in it, and it works well enough. I take calls and drive runs myself, so I don't have the hours to babysit a second system for 60 days for a company with no customers yet.",
+  "objection": "It's brand new with nobody else running on it. If the migration drops something or it falls over on a busy wedding Saturday, it's my coaches and my name on the line, not theirs.",
+  "would_change_my_mind": "Seeing two or three operators my size actually running it for six months or so, and my current provider jacking up their price or letting me down badly.",
+  "price_too_cheap": 150,
+  "price_cheap": 300,
+  "price_expensive": 550,
+  "price_too_expensive": 800
+}

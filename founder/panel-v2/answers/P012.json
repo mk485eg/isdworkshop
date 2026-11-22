@@ -1,0 +1,13 @@
+{
+  "id": "P012",
+  "buys": true,
+  "purchases_first_month": 1,
+  "reason_code": "need",
+  "reason": "We're adding vehicles and contracts and the spreadsheets are already cracking, and the double-booking and expired-licence warnings are exactly the things that keep me up at night. With them moving my data in for free, 60 days running it side by side and my money back if it flops, I'd sign up as a founding operator, but only after a demo where I see the driver side on a phone.",
+  "objection": "My drivers aren't tech people. If the run sheet on their phone isn't dead simple, they won't open it, and I'll be back to ringing and texting them, paying for software only half the business uses. On top of that it's a brand-new company with no other operators on it.",
+  "would_change_my_mind": "If two or three of my older drivers can't work out the phone run sheet in the first couple of weeks without me standing over them, I'd pull out inside the 60 days.",
+  "price_too_cheap": 80,
+  "price_cheap": 200,
+  "price_expensive": 400,
+  "price_too_expensive": 600
+}

@@ -1,0 +1,13 @@
+{
+  "id": "P002",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "My spreadsheet, whiteboard and Xero do the job for a handful of buses, and I don't have the evenings to learn a whole new system and move everything across. Two hundred bucks a month is real money for me, nearly two and a half grand a year, for something I've managed without.",
+  "objection": "It's a brand-new company with no customers. If it falls over or the business folds, my bookings are stuck in it, and I've wasted weeks setting it up instead of running trips.",
+  "would_change_my_mind": "A free trial where they set it up for me, load my existing bookings, and it flags clashes so I never double-book a regular client again, plus an operator like me who's actually using it.",
+  "price_too_cheap": 20,
+  "price_cheap": 49,
+  "price_expensive": 120,
+  "price_too_expensive": 199
+}

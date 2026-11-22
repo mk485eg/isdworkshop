@@ -1,0 +1,13 @@
+{
+  "id": "P014",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "trust",
+  "reason": "What I've got works well enough, and I don't put the business on software nobody I know has used. No other operator at the association can vouch for it yet, and I'm not going to be the guinea pig in the middle of excursion and end-of-year season.",
+  "objection": "Brand new company with zero customers. If it falls over on a Friday with twenty coaches out, or they fold in a year, I'm the one cleaning it up. The money-back offer and the Excel export don't fix a messed-up run sheet on the day.",
+  "would_change_my_mind": "A coach operator I trust, running a fleet my size, telling me they've used it through a busy season and it held up, especially the double-booking blocks and the accreditation records.",
+  "price_too_cheap": 150,
+  "price_cheap": 350,
+  "price_expensive": 650,
+  "price_too_expensive": 900
+}

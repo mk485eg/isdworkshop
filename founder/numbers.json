@@ -1,0 +1,88 @@
+{
+ "business": "MA Transport (fleet-based SaaS for Australian bus/coach operators)",
+ "unit": "customer-month",
+ "price": 262,
+ "variable": [
+  {
+   "label": "Support time per customer (1 support FTE at ~A$9,100/mo loaded handles ~60 customers) [estimate]",
+   "cost": 152
+  },
+  {
+   "label": "Hosting per customer: AU-region compute, storage, backups, email/SMS [estimate]",
+   "cost": 9
+  },
+  {
+   "label": "Card/payment processing ~2% of the subscription [estimate]",
+   "cost": 8
+  },
+  {
+   "label": "Migration done for the operator (~8h x A$60) spread over a 24-month life [estimate]",
+   "cost": 20
+  },
+  {
+   "label": "60-day refund guarantee: 20% of operators refunded 2 months, spread over 24 months [estimate]",
+   "cost": 7
+  }
+ ],
+ "fixed_monthly": [
+  {
+   "label": "Contract developer, 0.5 FTE (founder unpaid) [estimate]",
+   "cost": 6500
+  },
+  {
+   "label": "Base cloud platform, monitoring, backups [estimate]",
+   "cost": 450
+  },
+  {
+   "label": "SaaS tools: CRM, email, helpdesk, accounting [estimate]",
+   "cost": 400
+  },
+  {
+   "label": "Insurance: professional indemnity + cyber [estimate, get a quote]",
+   "cost": 250
+  },
+  {
+   "label": "Bookkeeping/accountant [estimate]",
+   "cost": 200
+  },
+  {
+   "label": "Customer acquisition: association memberships, depot visits, events [estimate]",
+   "cost": 1500
+  }
+ ],
+ "startup": [
+  {
+   "label": "MVP build: ~6 months of one contract developer [estimate]",
+   "cost": 60000
+  },
+  {
+   "label": "Legal: terms, privacy policy, data processing terms [estimate]",
+   "cost": 5000
+  },
+  {
+   "label": "Brand, website, demo environment [estimate]",
+   "cost": 3000
+  },
+  {
+   "label": "Launch: expo stand/travel to depots [estimate]",
+   "cost": 5000
+  }
+ ],
+ "days_per_month": 1,
+ "capacity_per_day": 2000,
+ "plan_per_day": 14,
+ "ramp_per_day": [
+  0,
+  0,
+  0,
+  1,
+  2,
+  3,
+  5,
+  7,
+  9,
+  10,
+  12,
+  14
+ ]
+}

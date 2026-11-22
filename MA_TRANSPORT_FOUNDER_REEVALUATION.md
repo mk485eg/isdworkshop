@@ -1,593 +1,492 @@
-# MA Transport: Founder Re-Evaluation and Startup Validation
+# MA Transport: Founder Skill Re-Evaluation and Startup Validation
 
-**Date:** 22 November 2026
-**Scope:** A fresh business and startup evaluation. No application code was changed or built.
-**Verdict:** **VALIDATE FIRST**, with a strong push to **narrow the scope**. Overall score: **45 / 100**.
+**Date:** 22 November 2026 · **Scope:** business and startup evaluation only. No application code was changed or built.
+**Framework:** the Founder Skill pack ([github.com/Jakeschincariol/founder-skill](https://github.com/Jakeschincariol/founder-skill), v1.0.0, MIT), installed into this session and run end to end.
+**Founder-plan verdict (computed): NOT YET** · **Overall score: 40 / 100** · **Recommendation: PIVOT** (narrow it hard, then validate with deposits before building)
 
 ---
 
-## 0. Method, evidence rules, and limitations (read first)
+## 0. How this evaluation was done
 
-### 0.1 About the "Founder Skill"
+### 0.1 The Founder Skill: what it is and how it was applied
 
-You asked me to use the Founder Skill you installed and tested. **I could not find it in this environment.** I checked:
+The skill is a pack of **eleven skills** run in order, each reading the files the previous ones wrote into `founder/`:
 
-- the project repository, which holds only `README.md`;
-- `~/.claude/skills`;
-- every installed plugin's skill list.
+```
+board → competitors → consumer → pricing → offer → cfo → marketing → brand → ops → launch → plan
+```
 
-None of them contains a skill named "founder", or any skill about startup evaluation or venture assessment. It may have been installed in another session, on another machine, or in a project this cloud container does not have.
+I installed it (`~/.claude/skills/founder-*`), ran its own test suite (**29 tests, all passing**), and ran every step. Four steps use the pack's own Python tools, unmodified. Their outputs are quoted, not retyped:
 
-So that the evaluation is still structured and not generic, I applied the closest installed frameworks:
-
-| Framework applied | Source in this environment | How it was used |
+| Step | What ran | Output (in this repo) |
 |---|---|---|
-| Competitive landscape mapping (direct, indirect, adjacent, substitute) | `product-management:competitive-brief` skill | Section 5 |
-| Multi-source research with each claim labelled by evidence | `deep-research` skill (method only) | Sections 3–5 |
-| VC-style scorecard and the 12 founder questions | Taken from your brief | Sections 2 and 13 |
+| `/founder-board` | 3 independent sub-agents, one per lens (Offers, Monopoly, Product), each reading only a neutral brief | `founder/board/*.md`, `founder/board.md` |
+| `/founder-competitors` | Public-source map of direct, indirect and substitute competitors, with links | `founder/competitors.csv`, `founder/competitors.md` |
+| `/founder-consumer --quick` | `panel.py` dealt **20 simulated buyers** (seed 2026); one sub-agent per buyer; tallied by the tool | `founder/panel/` |
+| `/founder-pricing` | `van_westendorp.py` on the panel's price answers, per tier | `founder/pricing-curve-*.md`, `founder/pricing.md` |
+| `/founder-offer` | Problem list → offer stack → **re-test on the same 20 buyers** | `founder/offer.md`, `founder/panel-v2/` |
+| `/founder-cfo` | `unit_economics.py` on `numbers.json` | `founder/cfo.md`, `founder/cfo-sources.md` |
+| `/founder-marketing`, `/founder-brand`, `/founder-ops`, `/founder-launch` | Positioning, channels and campaign; name and brand checks; operations and risk; a dated test-first launch | `founder/*.md` |
+| `/founder-plan` | `compile.py` computes the verdict from the numbers and the panel | `founder/business-plan.md`, `summary.md`, `one-pager.md` |
 
-**Action for you:** if the Founder Skill has its own rubric (category weights, kill criteria, scoring scale), send me the `SKILL.md`, or install it into this repository under `.claude/skills/`. I will re-score against its rubric. The evidence and the financial model below will not change; only the weights and the format might.
+**The skill's own limits, stated once (as it requires):** the consumer panel is **simulated buyers, not customers**. Language models lean agreeable, so its buy rate is an **upper bound**. The CFO numbers are projections from **estimated** inputs; nothing is a quote. None of this is financial, legal or tax advice.
 
-### 0.2 Research limitation
+**Deviations from the skill, disclosed:**
+- I used the 20-buyer `--quick` panel, not 100. The skill recommends this for a first look.
+- I did not stop to ask you to correct the customer profile before dealing the cards. It was built from your brief; check it in `founder/customer.json`.
+- For the subscription model, the CFO tool was run with `days_per_month: 1`, so wherever the tool prints "a day", read it as "paying customers".
+- In the offer re-test, the buyer cards' segment labels still named the old prices (A$199 / 399 / 699) while the new pitch showed A$179 / 379 / 599. Several buyers noticed and answered against the pitch.
 
-This session's network policy blocked direct page fetches. Every vendor and government site (bitre.gov.au, capterra.com.au, distinctive-systems.com and others) failed to resolve. **All research below comes from web-search results**: indexed page snippets and summaries, with links. I could not open the pages themselves, so I could not confirm a figure inside a PDF table. Each figure is labelled:
+### 0.2 Evidence labels and research limits
 
-- **[V]** Verified from the vendor's or regulator's own indexed page (search snippet of the primary source).
-- **[S]** Secondary source: an aggregator, Wikipedia, a review site or trade press.
-- **[A]** My assumption or estimate. Not a fact.
-- **NPD** Not Publicly Disclosed. Nothing was found.
+**[V]** a vendor's or regulator's own page (seen via a search snippet) · **[V-vendor]** a claim a vendor makes about itself · **[S]** a secondary or aggregator source · **[E]** an estimate or assumption · **[SIM]** a simulated-panel result · **NPD** not publicly disclosed.
 
-Before you rely on any **[V]** or **[S]** price in a decision, open the link and confirm it. Prices change.
+This session's network policy **blocked direct page fetches**: every vendor, review and government host failed to resolve. All market facts come from **web-search results with links**, and every price should be confirmed on the linked page before you rely on it. Verbatim competitor taglines could not be captured and were not guessed.
 
-### 0.3 No previous report available
+### 0.3 About the previous report
 
-The repository holds no earlier report and no application code, so nothing was reused. The earlier operating assumptions (15 buses, 13 active, 22 days, 572–715 trips a month) are treated below as **unverified [A]**.
+This report replaces the earlier version of this file, which was written without the Founder Skill (it wasn't installed then). New evidence changed the conclusion:
+- The board voted **3 PASS**.
+- The simulated panel bought at **0%**.
+- The computed plan verdict is **Not yet**.
+
+The recommendation therefore moves from "Validate first" to **"Pivot"**.
 
 ---
 
 ## 1. Executive Summary
 
-**What MA Transport is today:** a plan for an all-in-one cloud TMS covering fleet, drivers, bookings, scheduling, tracking, maintenance and finance, for "all Australian passenger transport operators", priced at A$199, A$399 or A$699 a month by fleet size.
+**The verdict in one line:** the complete, every-operator TMS described in your brief is **not a viable startup as pitched**. A much narrower product, a **"Clash-Free Charter Desk"** for independent charter operators with 3–30 vehicles, *might* be. It has to earn paying deposits before any serious build money is spent.
 
-**The honest headline:** the problem is real, but the product as scoped is **too broad, priced above the nearest established Australian competitor, and aimed at a market too small for venture-scale returns.** In its present form this is a credible **bootstrapped niche SaaS** business, not a high-growth startup. It becomes investable only if early customers show **strong willingness to pay** and **low churn** in one narrow segment.
+**What the Founder Skill found:**
 
-**Key findings:**
+1. **The board voted 3 PASS, average 3.0/10** (`founder/board.md`). All three lenses named the same killers: no evidence of demand; a suite with no single job, matching what incumbents already sell; and no route to customers.
+2. **The simulated panel bought 0 of 20 on your current pitch** **[SIM]** (`founder/panel/results.md`). Reasons for passing: **trust 10**, **habit 9**, **price 1**. Price is not the main blocker. **"New company, no customers, nobody I know uses it"** is.
+3. **A rebuilt offer moved it to 2 of 20 (10%)** **[SIM]** (`founder/panel-v2/results.md`). The offer was migration done for the operator, 60 days side by side, a 60-day refund, AU data and full export, and a single named outcome. **Both buyers were "growth-minded operators"**; no other behaviour group moved. That is the beachhead, and it is still below the skill's 25% bar.
+4. **The CFO model loses money in year 1 under every tested price** (`founder/cfo.md`):
+   - At the founding price (A$262 blended): contribution A$66 (25%), **break-even 141 customers**, year 1 **−A$107,442**, **cash needed A$180,442**.
+   - At list price (A$374 blended): contribution A$178 (48%), break-even 53 customers (72 once the cost of replacing churned customers is included; Section 8).
+5. **Pricing:** your **Fleet tier at A$699 is above the panel's acceptable range** (Van Westendorp PME A$650) **[SIM]**, and about 82% above Coach Manager's published A$385 unlimited plan **[V]**. Starter at A$199 sits on the edge of "too expensive" for 3–5 vehicle owners. **Cutting prices makes the economics worse**: support is a per-customer cost, so a 10% price cut raises break-even from 141 to 234 customers.
+6. **The market is served, not empty.** Coach Manager sells Australian-priced charter software from A$137.50 a month **[V]**. eCoachManager markets to Australian operators from about A$215–240 a month plus setup **[V]**. TransportMe claims 150+ contracted companies **[V-vendor]**. The large operators (Kinetic, CDC, Transdev and others) run enterprise systems and are **not a realistic market** for this product.
+7. **Market size caps the outcome.** About 618 interurban, rural and charter bus businesses (IBISWorld 2025) **[S]** and about 950 accredited NSW operators (BusNSW) **[S]**. A realistic serviceable market is 1,500–2,500 operators **[E]**. That supports a bootstrapped business at best, not a venture-scale one.
 
-1. **Charter and coach operations software already exists in Australia, and it is cheap.** Coach Manager (Distinctive Systems) publishes Australian prices from **A$137.50 to A$385 a month** (ex-GST), with unlimited capacity at the top tier **[V]**. eCoachManager markets to Australian operators from roughly **A$220–240 a month plus setup fees** **[V, partly ambiguous]**. Your Fleet tier at A$699 costs about **1.8 times** Coach Manager's unlimited plan.
-2. **The large operators you listed (Kinetic, CDC, Busways, Transit Systems, Transdev and others) are not your market.** They run government route contracts on enterprise scheduling systems: Trapeze, Optibus, GIRO HASTUS and Omnibus **[S]**. Drop them from the go-to-market plan entirely.
-3. **The reachable market is small.** IBISWorld counts **618 businesses** in Interurban and Rural Bus Transport (which includes charter) in 2025 **[S]**. BusNSW cites about **950 accredited operators in NSW** across all service types **[S]**. A realistic **serviceable** market is **roughly 1,500–2,500 operators** with 3–30 buses nationally **[A]**. At about A$4,300 a year per customer, the whole serviceable market is worth **about A$6–11 million in ARR** **[A]**, and you will win only part of it.
-4. **The unit economics work only at the realistic-to-optimistic end.** With support costs counted honestly, the conservative scenario (A$260 ARPA, 3% monthly churn, A$4,000 CAC) **never breaks even**. The realistic scenario breaks even at **about 52 customers if you bootstrap**, or **about 269 customers with a funded three-person team**, which is a large share of the whole serviceable market.
-5. **The single biggest risk is not technical.** It is that small operators are satisfied with spreadsheets, whiteboards, Xero and cheap existing tools, so **switching costs exceed the value you offer.**
-
-**Recommendation: VALIDATE FIRST.** Narrow to **one segment**: independent charter and coach operators with 5–30 vehicles on the NSW/VIC/QLD east coast. Narrow to **one painful workflow**: quote, booking, allocation, driver run sheet, invoice. Then prove that **at least 10 operators will pay** before you build the full TMS.
+**Recommendation: PIVOT.** Drop the complete-TMS and every-operator scope. Rebuild around one workflow (enquiry → quote → allocation → phone run sheet → Xero invoice, with clash and expiry blocking) for growth-minded independent charter operators. **Sell founding places with refundable deposits before building.** If fewer than 2 of 30 operators pay a deposit by 31 March 2027, **stop**.
 
 ---
 
 ## 2. Founder Skill Assessment (the 12 questions)
 
-| # | Question | Answer | Confidence |
+| # | Question | Answer from the pack | Evidence |
 |---|---|---|---|
-| 1 | Is it solving a real and expensive problem? | **Real, moderately expensive.** Charter operators juggle quotes, bookings, vehicle and driver allocation, accreditation records and invoicing. Trade press shows operators replacing "outdated" and "manual" systems, for example Kangaroo Bus Lines' scheduling, charter and maintenance application **[S]**. But the cost of the pain (admin hours, double-bookings, missed invoices) has **not been quantified for any operator**. That is the critical gap. | Medium |
-| 2 | Is the Australian market large enough? | **Large enough for a bootstrapped business; too small for venture capital on its own.** The serviceable market is about A$6–11M ARR **[A]**. Venture scale would need international expansion, or a broader product (payments, marketplace) that raises revenue per operator. | Medium |
-| 3 | Ideal initial customer? | An independent, owner-run charter and coach operator with **5–30 vehicles**, mostly charter, school excursion and corporate work (not government route contracts), on the east coast, currently on spreadsheets or a legacy desktop tool. See Section 6. | Medium–High |
-| 4 | Strongest competitors? | **Coach Manager** (cheap, Australian-priced, mature), **eCoachManager** (markets directly to Australian operators), **TransportMe** (Australian, 150+ contracted companies and 3,500+ vehicles per vendor claim **[V-vendor]**), **Busable** (Australian, regional operators). Telematics incumbents such as Teletrac Navman, EROAD and MTData own the in-vehicle layer. | High |
-| 5 | What do they do better? | Years of domain logic, published pricing, existing integrations, established reference customers, hardware and telematics (TransportMe, telematics vendors), and government contracts (TransportMe with Queensland TMR **[V-vendor]**). | High |
-| 6 | What would make an operator switch? | Only a **clearly better day-to-day workflow** at **similar or lower total cost**, plus **painless migration**: you import their customers, vehicles, drivers and future bookings for them. Specific triggers: a legacy system end-of-life, growth past what spreadsheets can handle, an accreditation audit failure, or a new operations manager. | Medium |
-| 7 | Is the subscription model viable? | **Yes in structure.** Per-fleet tiers are standard and easy to understand. **Not yet proven in level.** See Section 7. | Medium |
-| 8 | Are prices too low, too high, or reasonable? | **Starter A$199 is reasonable to slightly high. Growth A$399 is at the top of the market. Fleet A$699 is high** against Coach Manager's A$385 unlimited plan. Defensible only if you replace more tools (for example telematics-lite plus a driver app plus maintenance). | Medium |
-| 9 | Customer acquisition strategy? | Founder-led direct sales, industry associations (BusNSW, BusVic, QBIC, BIC), the Australasian Bus & Coach Expo, and referrals. Paid digital ads alone will not work for this audience. See Section 10. | Medium |
-| 10 | Biggest risks? | Low willingness to pay; incumbent price competition; high support load per customer; a long sales cycle for a low price; scope creep across the "complete TMS"; integration demands (Xero/MYOB, telematics); and liability around safety and compliance data. See Section 11. | High |
-| 11 | Can it scale profitably? | **Within Australia, to roughly A$0.5–1.5M ARR [A].** Beyond that it needs international markets (NZ, UK, US), where Moovs, Busify, Busie, CoachRail and Distinctive Systems already compete. | Low–Medium |
-| 12 | Viable startup or software project? | **At present it is a software project with a plausible but unproven niche business behind it.** There is no evidence yet of demand at these prices: no letters of intent, no paying pilots, no interviews on file. It becomes a startup when 10 operators pay. | High |
+| 1 | Real and expensive problem? | **Real but chronic, and not proven expensive.** Buyers cited double-bookings, peak-season admin and audit stress, yet 9 of 20 said what they have "works well enough". No real operator has put a dollar figure on the pain. | Panel v1 **[SIM]**; board: "no proof of pain" |
+| 2 | Market large enough? | **Large enough for a small bootstrapped business; too small for venture scale.** SAM about A$6.7–11.2M ARR at A$374 blended **[E]** | IBISWorld, BusNSW **[S]**; Section 4 |
+| 3 | Ideal initial customer? | **A growth-minded owner-manager of a 3–15 vehicle charter business** who is outgrowing spreadsheets. The only group that bought (2 of 3) **[SIM]** | `panel-v2/results.md` |
+| 4 | Strongest competitors? | **Coach Manager** (AU-priced, cheap), **eCoachManager** (cloud, targets AU), **TransportMe** (AU, government contracts), **Busable** (AU regional), **Moovs** (modern UX, could localise). Plus spreadsheets, the strongest of all. | `competitors.md` |
+| 5 | What do they do better? | They exist and have customers and history; Coach Manager is cheaper; TransportMe has hardware and government relationships; telematics is already in the bus. | Board (Monopoly): "competition by design" |
+| 6 | What would make an operator switch? | **The panel's flip answers, in order:** (1) an operator they know vouching for it (11 of 20 v1 answers); (2) migration done for them; (3) a free or side-by-side trial; (4) proof of charter quoting and accreditation fit; (5) a data-export guarantee; (6) starting after peak season. | `panel/results.md` "What would flip a no" **[SIM]** |
+| 7 | Subscription model viable? | **Structurally yes, at A$374+ blended and support ≤A$152 per customer.** It fails in the conservative case (never breaks even). | Section 8 |
+| 8 | Prices too low, high or reasonable? | **Starter: on the edge. Growth: OK. Fleet: too high.** Do not cut overall; restructure to A$179 / 379 / 599, +A$15 per vehicle, plus a paid or bundled onboarding fee. | `pricing.md`, Van Westendorp **[SIM]** |
+| 9 | Acquisition strategy? | **Trust-led:** state bus associations, founder depot visits with a live import of the operator's data, referrals from founding operators. No paid ads until there are references. Maximum acquisition cost ~A$1,400 per customer at list price. | `marketing.md` |
+| 10 | Biggest risks? | No operator pays (trust and habit); support cost destroys margin; founder burnout; outage on a live run; migration errors; incumbents copy. | `ops.md` risk register |
+| 11 | Can it scale profitably? | **Only to a small business in Australia.** Realistic case: break-even at 72 customers bootstrapped, 313 with a funded team. Beyond that requires NZ, UK or US, where Moovs, Busify and Busie are already present. | Section 8 |
+| 12 | Viable startup or software project? | **As pitched: a software project without demonstrated demand** (board 3 PASS; panel 0%; plan Not yet). **As pivoted:** a testable niche business. Only paid deposits will tell. | `business-plan.md` |
 
 ---
 
 ## 3. Problem and Market Validation
 
-### 3.1 What we can say with evidence
+### 3.1 What the board said (`founder/board.md`)
 
-- **Operators do replace legacy systems.** Kangaroo Bus Lines (QLD) was described as using "an outdated application for scheduling bus routes, charter management, and maintenance" **[S]** ([Telstra Purple case study](https://purple.telstra.com.au/case-studies/delivering-a-superior-transport-experience-for-queensland)). Buslines (NSW) moved from manual shift and roster creation to Omnibus, and later to Optibus **[S]** ([Optibus blog](https://blog.optibus.com/buslines-brings-optibus-to-new-south-wales-australia-to-improve-public-transportation); [ABC Bus News](https://www.busnews.com.au/industry-news/2012/buslines-nsw-automates-processes-for-business-growth)).
-- **Compliance creates a real paperwork burden.** NSW requires accreditation for all public bus services under the *Passenger Transport Act 1990*, with penalties of up to A$110,000 for operating without it. Requirements include fit-and-proper checks, a Bus Operator Accreditation Scheme (BOAS) audit regime, and vehicle roadworthiness obligations **[V]** ([TfNSW accreditation](https://www.transport.nsw.gov.au/operations/roads-and-waterways/business-and-industry/buses/operators/applying-for-bus-operator); [BOAS audit tool Oct 2025](https://www.transport.nsw.gov.au/system/files/media/documents/2025/boas-audit-tool-october-2025.pdf); [Accreditation package June 2025](https://www.transport.nsw.gov.au/system/files/media/documents/2025/bus-operator-accreditation-package-v1.1-june-2025.pdf)). **Audit-ready records** (driver checks, vehicle maintenance, incidents) are a stronger buying trigger than "nice dashboards".
-- **Competitors exist and have customers.** That is evidence the problem is real and that people pay for software to solve it. It also means the market is **contested**.
+| Lens | Score | Vote | Top killer |
+|---|---|---|---|
+| Offers | 3 | PASS | "No proof of pain or likelihood… likelihood is close to zero today" |
+| Monopoly | 3 | PASS | "Crowded market, incremental product… competition by design" |
+| Product | 3 | PASS | "No one thing… a suite, not a product" |
 
-### 3.2 What has *not* been validated (critical gaps)
+**Where the board disagreed:** whether being "not the cheapest" is a strength (Offers) or a weakness (Monopoly), and whether sticky data protects you once a customer is won (Monopoly) or stops operators from moving in the first place (Offers, Product).
 
-| Assumption | Status | How to test |
-|---|---|---|
-| Operators lose meaningful money or time to admin | **Unvalidated** | 15–20 structured interviews; time-and-motion on 3 operators |
-| Operators will pay A$199–699 a month | **Unvalidated** | Pricing interviews (Van Westendorp), paid pilots, deposits |
-| Operators will switch from existing tools | **Unvalidated** | Ask what they use now, what it costs, what made them try something new |
-| 15 buses, 13 active, 22 days, 572–715 trips a month | **Unverified model input [A]** | Ask interviewees for real monthly trip counts and fleet utilisation |
-| Larger operators are a future market | **Contradicted by evidence** | They use enterprise scheduling; see Section 5 |
+### 3.2 What the simulated buyers said (`founder/panel/results.md`) **[SIM]**
 
-### 3.3 Problem severity verdict
+**0 buy · 20 pass.** Examples of reasons given (simulated research, not testimonials):
 
-The problem is **real but "chronic", not "acute"**. Operators have muddled through with spreadsheets for decades. Chronic problems sell slowly. The acute moments to target are a **failed or upcoming accreditation audit**, **a double-booking that cost a contract**, **the operations manager leaving**, and **a legacy system being discontinued**.
+- Trust: *"It's brand new with zero customers, and I don't touch software until another operator at the association tells me it actually works."* (P003)
+- Habit: *"I already pay for a charter package that does my quoting and holds years of bookings and customer history. I'm not tearing that out for a brand-new company with no customers."* (P006)
+- Price: *"Two hundred a month is near on two and a half grand a year for a handful of buses I already run fine with a diary, a spreadsheet and the phone."* (P001)
+
+### 3.3 Real-world facts that support the problem
+
+- NSW requires accreditation for public bus services under the *Passenger Transport Act 1990*, with penalties of up to A$110,000, and a BOAS audit regime (audit tool updated October 2025) **[V]**: [TfNSW accreditation](https://www.transport.nsw.gov.au/operations/roads-and-waterways/business-and-industry/buses/operators/applying-for-bus-operator) · [BOAS audit tool](https://www.transport.nsw.gov.au/system/files/media/documents/2025/boas-audit-tool-october-2025.pdf) · [Accreditation package June 2025](https://www.transport.nsw.gov.au/system/files/media/documents/2025/bus-operator-accreditation-package-v1.1-june-2025.pdf).
+- Operators do replace legacy tools. Kangaroo Bus Lines (QLD) was described as using "an outdated application for scheduling bus routes, charter management, and maintenance" **[S]** ([Telstra Purple](https://purple.telstra.com.au/case-studies/delivering-a-superior-transport-experience-for-queensland)). Buslines (NSW) moved to Optibus **[S]** ([Optibus](https://blog.optibus.com/buslines-brings-optibus-to-new-south-wales-australia-to-improve-public-transportation)).
+
+### 3.4 Not validated (needs real operators)
+
+The cost of the pain in dollars and hours; willingness to pay; switching triggers; your earlier model of a 15-bus operator, 13 active buses, 22 days and 572–715 trips a month (**unverified [E]**; ask interviewees for real trip counts).
 
 ---
 
 ## 4. Australian Market Opportunity
 
-### 4.1 Market size facts
+| Metric | Figure | Label / source |
+|---|---|---|
+| Registered buses (Jan 2023) | ~97,400; NSW ~26,660 | [S] [Statista citing BITRE](https://statista.com/statistics/824830/australia-number-of-registered-buses); BITRE Jan 2025 edition [not openable here](https://www.bitre.gov.au/sites/default/files/documents/BITRE-Road-vehicles-Australia-January-2025--september2025--pdf.pdf) |
+| Interurban and rural bus businesses (incl. charter), 2025 | 618 (−1.6%) | [S] [IBISWorld](https://www.ibisworld.com/australia/number-of-businesses/interurban-and-rural-bus-transport/458) |
+| That segment's revenue, 2025 | ~A$2.4bn | [S] [IBISWorld](https://www.ibisworld.com/australia/market-size/interurban-and-rural-bus-transport/458) |
+| Accredited bus operators, NSW | ~950 | [S] [BusNSW](https://busnsw.com.au/about-us/) |
+| Bus and coach industry employment | >85,000 | [S] [BIC submission](https://infrastructure.gov.au/sites/default/files/documents/lclf2024-bus-industry-confederation.pdf) |
+| Operator-level fleet lists | Dataset exists | [V] [Australian Bus Fleet Lists](https://opendata.transport.nsw.gov.au/data/dataset/australian-bus-fleet-lists) |
 
-| Metric | Figure | Label | Source |
-|---|---|---|---|
-| Registered buses, Australia (Jan 2023) | ~97,400 (NSW ~26,660 highest) | [S] (Statista citing BITRE) | [Statista](https://statista.com/statistics/824830/australia-number-of-registered-buses); [BITRE Road Vehicles Jan 2025](https://www.bitre.gov.au/sites/default/files/documents/BITRE-Road-vehicles-Australia-January-2025--september2025--pdf.pdf) (could not open) |
-| Interurban and rural bus transport businesses (ANZSIC 4621, includes charter), 2025 | 618 (down 1.6% on 2024) | [S] | [IBISWorld number of businesses](https://www.ibisworld.com/australia/number-of-businesses/interurban-and-rural-bus-transport/458) |
-| Interurban and rural bus transport revenue, 2025 | ~A$2.4bn | [S] | [IBISWorld market size](https://www.ibisworld.com/australia/market-size/interurban-and-rural-bus-transport/458) |
-| Accredited bus operators, NSW | ~950 | [S] (industry body) | [BusNSW About](https://busnsw.com.au/about-us/) |
-| Bus and coach industry employment | >85,000 | [S] (BIC submission) | [BIC LCLF 2024](https://infrastructure.gov.au/sites/default/files/documents/lclf2024-bus-industry-confederation.pdf) |
-| Victorian diesel bus fleet (route) | ~4,500 | [V] | [Vic Zero Emissions Bus plan](https://www.vic.gov.au/zero-emissions-bus-trial) |
-| Fleet lists by operator, all states | Dataset exists | [V] | [Australian Bus Fleet Lists (TfNSW Open Data)](https://opendata.transport.nsw.gov.au/data/dataset/australian-bus-fleet-lists) |
+**Large operators (verified context, not targets):** Kinetic says it is "Australia & NZ's biggest bus operator" **[V-vendor]** ([site](https://wearekinetic.com/)). Kinetic Melbourne has 602 buses, Transdev John Holland 472, CDC Melbourne 387, CDC Ballarat 76 and Kinetic Townsville 81 **[S]** ([Wikipedia: Kinetic Melbourne](https://en.wikipedia.org/wiki/Kinetic_Melbourne), [Transdev JH](https://en.wikipedia.org/wiki/Transdev_John_Holland), [CDC Melbourne](https://en.wikipedia.org/wiki/CDC_Melbourne), [CDC Ballarat](https://en.wikipedia.org/wiki/CDC_Ballarat), [Kinetic Townsville](https://en.wikipedia.org/wiki/Kinetic_Townsville)). Ventura's fleet was absorbed into Transdev Melbourne **[S]** ([Wikipedia](https://en.wikipedia.org/wiki/Transdev_Melbourne)). Dysons: ~A$245M 2025 revenue (IBISWorld) **[S]**. **Busways and Transit Systems current fleets: NPD.** These operators use enterprise scheduling (Trapeze, Optibus, GIRO). **Remove "larger operators" from the plan.**
 
-**Important caveat:** the 97,400 registered buses include many small buses owned by schools, churches, aged care, clubs, mines and hire firms that are **not** commercial passenger transport operators. That number is **not** your market.
-
-### 4.2 TAM / SAM / SOM (all estimates [A])
-
-| Layer | Definition | Operators | ARPA/yr | Value |
-|---|---|---|---|---|
-| TAM | All accredited commercial bus/coach operators in Australia | ~3,000–4,000 [A], extrapolated from ~950 in NSW, NSW holding ~27% of registered buses | ~A$4,300 | ~A$13–17M |
-| SAM | Independent operators with 3–30 vehicles, mostly charter, school and tour work, not on enterprise systems | ~1,500–2,500 [A] | ~A$4,300 | **~A$6–11M** |
-| SOM (5 years) | A realistic share for a new entrant against Coach Manager, eCoachManager, TransportMe and Busable | 5–10% of SAM: ~75–250 operators | ~A$4,300 | **~A$0.3–1.1M ARR** |
-
-**Interpretation:** a good **lifestyle or bootstrapped SaaS** outcome (around A$1M ARR, 50–70% margins, small team) is possible. A **venture-scale** outcome (over A$10M ARR) is not possible from Australian passenger transport alone.
-
-**Action:** download the [Australian Bus Fleet Lists dataset](https://opendata.transport.nsw.gov.au/data/dataset/australian-bus-fleet-lists) and count operators by fleet size. This would turn the SAM from an estimate into a verified number. I could not open it from this environment.
-
-### 4.3 Large operators: verified context (not targets)
-
-| Operator | Data point | Label | Source |
-|---|---|---|---|
-| Kinetic | Calls itself "Australia & NZ's biggest bus operator"; 37,400+ people; 300+ electric buses across 10 depots (Australasia, including UK/NZ group figures) | [V-vendor] | [wearekinetic.com](https://wearekinetic.com/); [Our story](https://www.wearekinetic.com/our-story) |
-| Kinetic Melbourne | 602 buses (June 2024) | [S] | [Wikipedia](https://en.wikipedia.org/wiki/Kinetic_Melbourne) |
-| Kinetic Townsville | 81 buses (Jan 2025) | [S] | [Wikipedia](https://en.wikipedia.org/wiki/Kinetic_Townsville) |
-| CDC Melbourne | 387 buses (Aug 2024); absorbed Kastoria/Broadmeadows fleet 1 July 2025 | [S] | [Wikipedia](https://en.wikipedia.org/wiki/CDC_Melbourne) |
-| CDC Ballarat | 76 buses and coaches (June 2024) | [S] | [Wikipedia](https://en.wikipedia.org/wiki/CDC_Ballarat) |
-| Transdev John Holland (Sydney) | 472 buses incl. 25 electric (July 2026) | [S] | [Wikipedia](https://en.wikipedia.org/wiki/Transdev_John_Holland) |
-| Ventura | Its routes and fleet were absorbed into Transdev Melbourne (~500 buses inherited from MBL, Ventura and SmartBus operators) | [S] | [Wikipedia](https://en.wikipedia.org/wiki/Transdev_Melbourne) |
-| Dyson Group | 2025 revenue ~A$245.4M (IBISWorld, Interurban/Rural segment); Melbourne charter since 1952 | [S] | [IBISWorld](https://www.ibisworld.com/australia/industry/interurban-and-rural-bus-transport-in-australia/458/); [Dysons](https://dysongroup.com.au/node/25) |
-| Busways | Current fleet size: **NPD** (not found) | NPD | none |
-| Transit Systems | Current fleet size: **NPD** (not found) | NPD | none |
-
-**Conclusion:** these operators run hundreds of buses each under government contracts, with enterprise scheduling, ticketing and AVL systems. **A new SaaS with tiers capped at 30 buses has no realistic route into them within 3–5 years.** Remove "larger transport operators" from the plan.
+**Sizing [E]:** TAM about 3,000–4,000 accredited operators nationally (extrapolated from NSW's ~950 and NSW's ~27% share of buses). **SAM** is 1,500–2,500 independent operators with 3–30 vehicles; at A$374 a month that is **A$6.7–11.2M ARR**. **SOM** is 5–10% of SAM in 5 years, 75–250 operators, **about A$0.3–1.1M ARR**. **Next step:** count operators by fleet size from the Australian Bus Fleet Lists to replace this estimate.
 
 ---
 
 ## 5. Competitor Analysis
 
-### 5.1 Competitive map
+From `founder/competitors.md` (21 entries in `founder/competitors.csv`). Direct competitors are separated from general fleet software.
 
-- **Direct:** charter/coach booking, dispatch and operations software sold to small and medium operators.
-- **Indirect:** school-bus and route operations tools, and broker marketplaces.
-- **Adjacent:** telematics and fleet maintenance platforms that could add booking modules.
-- **Enterprise:** public-transport scheduling suites. Not competitors for SMB charter, but they block the "large operator" ambition.
-- **Substitutes:** Excel, Google Sheets and Calendar, whiteboards, Xero/MYOB, email and phone.
+### 5.1 Direct competitors (charter, coach and bus operations software)
 
-### 5.2 Competitor table (19 named products, plus substitutes)
+| Competitor | Target market | Main features | Pricing | Strengths | Weaknesses |
+|---|---|---|---|---|---|
+| [Coach Manager](https://distinctive-systems.com/au/products/coach-manager/australian-pricing/) | Coach/charter operators; AU office | Reservations, quoting, dispatch, contracts; sister maintenance and driver-compliance systems | **[V] A$137.50–385/mo** ex-GST; +A$27.50/user | Cheapest AU-published; mature; capacity-based | Windows-based **[S]**; public reviews NPD |
+| [eCoachManager](https://ecoachmanager.com/packages-price-list-nz/) | Coach/minibus hire (AU/UK/NZ) | Cloud quoting, booking, dispatch, driver app, invoicing | **[V]** ~A$215–240/mo + A$300–350 setup | Cloud; targets AU | No G2 reviews **[V]**; pricing page ambiguous |
+| [TransportMe](https://www.transportme.com.au) | AU operators, govt, schools | Ticketing, GPS, compliance, maintenance, passenger app | NPD | 150+ companies, 3,500+ vehicles, Qld TMR contract **[V-vendor]**; ISO 27001 | Hardware/school-centric; charter depth unverified |
+| [Busable](https://busable.app/about) | Regional AU operators | Timetables; reported rostering, charter, tracking | NPD | Australian, regional | Charter depth unconfirmed |
+| [RouteStra](https://www.capterra.com.au/software/1113395/RouteStra) | Bus/coach operators | Scheduling, compliance, private hire, rosters | NPD (per user) | Compliance + charter | Customer base NPD |
+| [Coach & Charter Manager](https://www.capterra.com.au/software/201842/coach-charter-manager) | Charter operators | Charter management | **[S]** from US$100/mo | 4.8/5 (21) **[S]** | Details unclear |
+| [Moovs](https://www.moovsapp.com/en-au/charter-bus-software) | N. American charter/limo; `en-au` site | Quoting, dispatch, driver app, payments, portal | **[S]** US$129–199/mo + free plan | Modern UX; 4.8/5 (33) [Capterra](https://www.capterra.com/p/209139/moovs/) | No AU compliance; setup effort mentioned **[S]** |
+| [Busify](https://www.busify.com/) | US charter | Quotes, dispatch, driver app, maintenance | NPD | Charter-specific | US-focused |
+| [Busie](https://www.getbusie.com/) | US charter | All-in-one + marketplace | NPD | Marketplace angle | US-focused |
+| [CoachRail](https://www.itqlick.com/coachrail/pricing) | US charter/limo | Dispatch, mobile app | **[S]** ~US$50/user/mo | Mobile | US-focused |
+| [Sengerio](https://www.softwareadvice.com.au/software/166261/sengerio) | Charter/tour (EU) | Booking, fleet, driver planning | **[S, unverified]** €7.60/mo | Multi-module | AU presence unverified |
+| [CIS-BUS Charter](https://www.capterra.com.au/software/1016965/cis-bus-charter) | Charter providers | Cloud charter management | NPD | Charter-specific | Little public info |
 
-| # | Competitor | Type | Target market | Main features | Pricing | Strengths | Weaknesses |
-|---|---|---|---|---|---|---|---|
-| 1 | **Coach Manager** (Distinctive Systems) | Direct | Coach and charter operators; AU and US offices | Charter reservations, quoting, dispatch, recurring contracts; sister Vehicle Maintenance System | **[V] A$137.50/mo** (Express L1, 1,000 movements) to **A$220** (Full L1), **A$247.50/330** (L5), **A$302.50/385** (Unlimited); +A$27.50/user; +A$110/company; ex-GST. [AU pricing](https://distinctive-systems.com/au/products/coach-manager/australian-pricing/) | Mature, Australian pricing published, cheap, capacity-based (not per bus) | Interface age and UX not verified; per-user fees add up; review data NPD |
-| 2 | **eCoachManager** | Direct | Coach and minibus hire operators, AU/UK/NZ | Cloud quoting, booking, dispatch, driver app, invoicing | **[V, ambiguous]** "From $215/mo" in one listing; tier snippets show from $220–240/mo plus $300–350 setup, and annual prepay options. One tier figure ($1,670/mo) looks like a parsing error. [Price list (NZ)](https://ecoachmanager.com/packages-price-list-nz/); [AU costs article](https://ecoachmanager.com/e-coach-manager/ecoachmanager-understanding-fleet-software-costs-in-australia/) | Markets directly to Australia; unlimited users | Pricing page unclear; content-marketing heavy; independent reviews NPD |
-| 3 | **TransportMe (TMe)** | Direct / indirect | AU bus operators, governments, schools | Ticketing, smartcards, GPS, driver console, compliance, maintenance, passenger app, student manifests | **NPD** ("free quote") | Australian; ISO 27001/9001; claims 150+ contracted companies, 3,500+ vehicles, Qld TMR contract **[V-vendor]**. [Site](https://www.transportme.com.au); [ABC article](https://www.busnews.com.au/transportme-transit-management-system-brings-unique-perspective-to-fleet-management/) | Hardware-centric; skews to school/route; charter depth unverified |
-| 4 | **Busable** | Direct | Regional AU bus operators | Route/timetable publishing; reported planning, rostering, charter, tracking, maintenance | **NPD** | Australian, regional focus, "affordable" mission **[V-vendor]**. [About](https://busable.app/about) | Charter/rostering depth not confirmed in sources |
-| 5 | **RouteStra** | Direct | Bus and coach operators | Scheduling, compliance, private hire, rosters, timetables | **NPD**; per user, free trial **[S]** | Combines compliance and private hire | Young product; customer base NPD. [Capterra AU](https://www.capterra.com.au/software/1113395/RouteStra) |
-| 6 | **Coach & Charter Manager** (Capterra listing) | Direct | Coach and charter operators | Charter management | **[S] from US$100/mo**; 4.8/5 (21 reviews) per search summary. Listing details ambiguous. | Well reviewed | Identity and features need confirming. [Capterra AU](https://www.capterra.com.au/software/201842/coach-charter-manager) |
-| 7 | **Moovs** | Direct (international) | North American charter, limo and shuttle operators; has an `en-au` site | Quoting, booking, dispatch, driver app, payments, customer portal | **[S, conflicting]** US$129–199/mo flat tiers, plus a free plan. [Capterra](https://www.capterra.com/p/209139/moovs/pricing/); [Moovs AU page](https://www.moovsapp.com/en-au/charter-bus-software) | Modern UX, payments built in, freemium | US-centric; no Australian compliance |
-| 8 | **Busify** | Direct (international) | US charter/motorcoach | Quotes, dispatch, driver app, maintenance | **NPD** | Purpose-built for charter. [busify.com](https://www.busify.com/) | US-focused |
-| 9 | **Busie** | Direct (international) | US charter/motorcoach | All-in-one charter ops, marketplace | **NPD** | Modern, marketplace angle. [getbusie.com](https://www.getbusie.com/) | US-focused |
-| 10 | **CoachRail** | Direct (international) | Charter bus, motorcoach, limo | Cloud dispatch, mobile app | **[S] ~US$50/user/mo** (ITQlick); a $199/mo figure was not confirmed. [ITQlick](https://www.itqlick.com/coachrail/pricing) | Mobile app | US-focused; aggregator pricing |
-| 11 | **Sengerio** | Direct (international) | Bus charter, tour operators, group travel | Charter booking, fleet, driver planning | **[S, unverified]** from €7.60/mo per Software Advice; otherwise NPD. [Software Advice AU](https://www.softwareadvice.com.au/software/166261/sengerio) | European, multi-module | Pricing unclear; AU presence unverified |
-| 12 | **CIS-BUS Charter** | Direct | Charter providers | Cloud charter management | **NPD**. [Capterra AU](https://www.capterra.com.au/software/1016965/cis-bus-charter) | Charter-specific | Little public information |
-| 13 | **BusMinder** | Indirect | AU school bus operators, schools, parents | GPS and smartcard student tracking, driver app | **NPD**. [App Store](https://apps.apple.com/app/id1364797036) | Owns the school-safety workflow | Not charter ops |
-| 14 | **RollCall** | Indirect | AU/NZ schools and bus operators | Student scans, parent notifications, duty of care | **NPD**; claims 300+ schools and operators **[V-vendor]**. [rollcall.com.au](https://rollcall.com.au/bus-companies) | Strong in school duty of care | Not charter ops |
-| 15 | **Trapeze** | Enterprise | Government and large route operators | Timetabling, driver scheduling, rostering | **NPD**. [Trapeze AU](https://trapezegroup.com.au/bus/planning-scheduling/) | Deep, entrenched | Out of SMB price range |
-| 16 | **Optibus** | Enterprise | Route operators (e.g. Buslines NSW) | Planning, scheduling, rostering, AI optimisation | **NPD** | Modern, AI-led | Out of SMB price range |
-| 17 | **GIRO HASTUS** / **Omnibus** | Enterprise | Transit agencies, route operators | Scheduling | **NPD** | Incumbents | Not charter |
-| 18 | **Teletrac Navman / EROAD / MTData** | Adjacent (telematics) | Commercial fleets including bus | GPS, EWD/fatigue (Teletrac supports a "Bus" rule set), maintenance, cameras | **[S]** Teletrac ~A$25–30/vehicle/mo (aggregators); **[V]** EROAD "from $25/vehicle/mo" with hardware purchase, or $35 without (currency and GST unstated); MTData **NPD**. [ExpertMarket AU](https://www.expertmarket.com/au/vehicle-tracking/teletrac-navman-review); [EROAD pricing](https://eroad.com/?p=84) | Already in the vehicle; data source | No charter booking workflow |
-| 19 | **Samsara / Geotab / Fleetio** | Adjacent (fleet) | General fleets | Telematics, maintenance, inspections | **[S]** Samsara ~US$27–50/vehicle/mo plus hardware (US third parties); **[V]** Fleetio US$4–10/vehicle/mo, 5-vehicle minimum. [Fleetio pricing](https://fleetio.com/pricing) | Strong maintenance and inspections | No passenger booking or charter logic |
-| – | **BusCharter.com.au** and other brokers | Indirect / channel | End customers booking charters | Marketplace connecting buyers to local operators (Qld launch May 2026) | Commission: **NPD** | Owns demand | Could become a channel *or* a competitor. [AAP release](https://www.aap.com.au/aapreleases/globenewswire9727742/) |
-| – | **Spreadsheets, whiteboards, Xero/MYOB** | Substitute | Every small operator | Everything, badly | ~A$0 extra | Free, familiar, flexible | Error-prone, not audit-ready, does not scale |
+### 5.2 Indirect competitors and general fleet software
 
-### 5.3 What competitors do better than MA Transport today
+| Competitor | Target market | Main features | Pricing | Strengths | Weaknesses |
+|---|---|---|---|---|---|
+| [BusMinder](https://apps.apple.com/app/id1364797036) | AU school buses | GPS/smartcard student tracking | NPD | Owns school safety | Not charter |
+| [RollCall](https://rollcall.com.au/bus-companies) | AU/NZ schools and operators | Student scans, parent alerts | NPD | 300+ schools/operators **[V-vendor]** | Not charter |
+| [Trapeze](https://trapezegroup.com.au/bus/planning-scheduling/) / [Optibus](https://blog.optibus.com/buslines-brings-optibus-to-new-south-wales-australia-to-improve-public-transportation) | Govt and large route operators | Timetabling, scheduling, rostering | NPD | Entrenched in enterprise | Out of SMB range |
+| [Teletrac Navman](https://www.expertmarket.com/au/vehicle-tracking/teletrac-navman-review) | All AU commercial fleets | GPS, EWD incl. bus fatigue rules, maintenance | **[S]** ~A$25–30/vehicle/mo | Already in the vehicle | No charter booking |
+| [EROAD](https://eroad.com/?p=84) | AU/NZ fleets | Telematics, compliance | **[V]** $25–35/vehicle/mo | In-vehicle data | No charter booking |
+| [Fleetio](https://fleetio.com/pricing) | Global fleets | Maintenance, inspections | **[V]** US$4–10/vehicle/mo | Cheap maintenance | No passenger logic |
+| [BusCharter.com.au](https://www.aap.com.au/aapreleases/globenewswire9727742/) | End customers (broker) | Marketplace to local operators | NPD | Owns demand | Channel *or* threat |
+| Spreadsheets + whiteboard + Xero | Every small operator | Everything, by hand | ~A$0 extra | Free, familiar | Error-prone; not audit-ready |
 
-1. **They exist and have customers.** MA Transport has no product in market and no reference customers.
-2. **Coach Manager is cheaper** at every tier above Starter, and has no per-bus cap.
-3. **TransportMe owns hardware, ticketing and government relationships**, which a software-only start-up cannot copy quickly.
-4. **Telematics vendors are already installed in the buses.** Operators will expect MA Transport to integrate with them, not replace them.
-5. **International players (Moovs and others) have modern UX, payments and freemium plans.** If one of them localises for Australia, it competes on product quality and price at the same time.
+**Price range for the comparable item (published AU-relevant):** lowest A$137.50, **median A$240**, highest A$385. **MA Transport's current Growth and Fleet tiers sit above the highest.**
 
-### 5.4 Where a gap may exist (hypotheses to test)
+**Customer complaints:** independent reviews barely exist for this niche. Every complaint theme found has fewer than three reviews, so all are thin. The only one found is setup and onboarding effort (Moovs **[S]**). **Real complaints will only come from operator interviews.**
 
-- **Modern, mobile-first UX built for Australian compliance.** Hypothesis: the incumbents are either older (Coach Manager) or hardware/school-centric (TransportMe, BusMinder, RollCall).
-- **Accreditation audit readiness in one place**: driver checks, vehicle maintenance, incident logs and BOAS evidence, matched to the TfNSW BOAS audit tool.
-- **Quote-to-cash speed**: instant online quotes, deposits and Xero sync, for operators who lose work by quoting slowly.
+**The gap:** **no proven gap.** The hypotheses supported by evidence:
+1. Modern cloud UX with Australian compliance built in. The cheapest AU-priced incumbent is Windows-based; the modern cloud players are North American.
+2. Switching done for the operator.
+3. Accreditation evidence produced as a by-product of daily dispatch.
 
-These are **hypotheses**. None is proven.
+**None is a moat.** Fastest to copy: eCoachManager (cloud, AU-facing), Moovs (localise), Coach Manager (price or a cloud UI), and telematics vendors (bundle a booking add-on).
 
 ---
 
-## 6. Ideal Customer Profile (ICP)
+## 6. Ideal Customer Profile
 
-### 6.1 Beachhead ICP
-
-| Attribute | Definition |
+| Attribute | Beachhead ICP |
 |---|---|
-| Segment | Independent, owner-operated **charter and coach** businesses |
-| Fleet | **5–30 vehicles** (minibuses up to 57-seat coaches) |
-| Work mix | Mostly charter: school excursions, corporate, weddings, events, airport and tour transfers. Little or no government route contract work. |
-| Geography | NSW, VIC, SE QLD first (density; NSW has ~950 accredited operators **[S]**) |
-| Current tools | Spreadsheets, whiteboard, email, Xero/MYOB, or a legacy desktop tool |
-| Buyer | Owner/MD (economic buyer); operations or charter manager (daily user) |
-| Trigger events | Growth past ~8 vehicles, an accreditation audit, a new ops manager, legacy software end-of-life, a costly booking error |
+| Who | Owner-manager of an independent charter/coach business |
+| Fleet | **3–15 vehicles** first (both v2 buyers were in this band) **[SIM]**; 16–30 later |
+| Behaviour | **Growth-minded**: adding vehicles or contracts, feels the admin outgrowing the setup |
+| Work | Charter, school excursions, corporate, weddings, transfers; not government route contracts |
+| Today | Excel + whiteboard + Xero, or an older package |
+| Region | NSW, then VIC and SE QLD |
+| Trigger | A recent double-booking, growth past ~8 vehicles, an upcoming accreditation audit, a new office manager |
+| Timing | **Approach and onboard February–October**, never during the Nov–Dec excursion and end-of-year peak (raised repeatedly in the panel) **[SIM]** |
 
-### 6.2 Who is *not* the ICP (for now)
-
-- Government route operators of any size, which are contract-driven and on enterprise systems.
-- Operators with 1–3 vehicles, who cannot justify A$199 a month and churn heavily.
-- School-only operators whose need is student tracking (BusMinder and RollCall serve them).
-- Non-transport organisations that own buses (churches, schools, aged care).
-
-**Verdict on breadth:** your current target list (private, charter, passenger transport, shuttle, SME, *and* large operators) is **too broad**. Each segment has different workflows, buyers and compliance needs.
+**Not now:** spreadsheet loyalists, cost-cutters, operators locked in to an incumbent, compliance worriers (who want audit proof first), large route operators, and non-transport bus owners. The current target list (private, charter, shuttle, SME, *and* large operators) is **too broad**.
 
 ---
 
 ## 7. Pricing Strategy
 
-### 7.1 Your tiers against the market
+From `founder/pricing.md`.
 
-| | Starter | Growth | Fleet | Extra bus |
+| Tier | Current | Panel acceptable range **[SIM]** | Competitor anchor **[V]** | Recommendation |
 |---|---|---|---|---|
-| MA Transport (hypothesis) | A$199 (≤5) | A$399 (≤15) | A$699 (≤30) | A$20–30 |
-| Implied per bus at the cap | A$39.80 | A$26.60 | A$23.30 | A$20–30 |
-| Coach Manager Full [V] | A$220 (L1) | A$330 (L5) | A$385 (Unlimited) | n/a (capacity by movements) |
-| Coach Manager Express [V] | A$137.50 | A$247.50 | A$302.50 | n/a |
-| eCoachManager [V, ambiguous] | ~A$220–240 + setup | NPD | NPD | n/a |
-| Telematics only (EROAD [V] / Teletrac [S]) | ~A$25–35/vehicle/mo | | | |
-| Fleetio maintenance [V] | US$4–10/vehicle/mo | | | |
+| Starter (≤5) | A$199 | A$49–199 (at the top edge) | Coach Manager A$137.50–220 | **A$179** (test A$149 vs A$199) |
+| Growth (≤15) | A$399 | A$102–450 (inside) | Coach Manager Full A$220–385 | **A$379** (test A$349 vs A$399) |
+| Fleet (≤30) | A$699 | A$151–650 (**above**) | Coach Manager Full Unlimited A$385 | **A$599** (test A$549 vs A$649) |
+| Extra vehicle | A$20–30 | n/a | Telematics A$25–35 | **A$15** |
+| Onboarding/migration | none | n/a | eCoachManager setup A$300–350 | **A$750–1,500**, or bundled free with a 12-month term (test both) |
 
-### 7.2 Verdict
+**Why not cut prices** (CFO tool, `pricing.md`, run before the offer's migration and refund costs were added): at the current tiers' blended A$414, break-even is 38 customers. At A$300 it is 71; at A$250 it is 115. Support is per customer, so discounts multiply break-even.
 
-- **Starter (A$199): reasonable.** It sits between Coach Manager Express and Full. Keep it, or test A$149 with annual prepayment.
-- **Growth (A$399): at the top of the market.** Justified only if it includes a driver app plus maintenance plus compliance, so it replaces two tools.
-- **Fleet (A$699): too high against the direct competitor.** A 25-bus operator would pay A$699 to MA Transport against A$385 to Coach Manager Full Unlimited. You need a clear reason for an 82% premium. **Test A$499–549.**
-- **Extra bus at A$20–30 is about the same as a telematics subscription.** Operators will compare the two. Set the add-on at **A$15–20**.
-
-### 7.3 Recommended pricing experiments (for validation, not launch)
-
-1. **Founding-customer offer:** 12 months at 40% off, **prepaid** or with a deposit, in return for weekly feedback and a case study. Prepayment is the strongest willingness-to-pay signal you can get.
-2. **Van Westendorp price-sensitivity questions** in every discovery interview.
-3. **Charge for migration and onboarding** (A$500–1,500 one-off). eCoachManager charges setup fees **[V]**, so the market accepts them, and they filter out tyre-kickers.
-4. **Keep per-trip pricing as a later option.** It aligns cost with seasonal revenue, but makes revenue unpredictable. Revisit once you have trip data.
-5. **Payments revenue (later):** taking customer deposits through MA Transport, with a fee on payments, can raise revenue per operator without raising the subscription price. Moovs uses payments **[S]**.
+**Per-trip pricing:** keep it parked. It suits seasonal revenue but makes revenue unpredictable, and operators already compare everything per vehicle.
 
 ---
 
 ## 8. Financial Projections
 
-### 8.1 Verified versus assumed inputs
+### 8.1 Verified versus assumed
 
-| Input | Value | Label |
-|---|---|---|
-| Competitor price anchors | Section 7 | [V]/[S] |
-| SMB SaaS CAC median ~US$1,100–1,400; payback 9–16 months | benchmark | [S], secondary blog summaries of OpenView/High Alpha; [Kyle Poyar 2025](https://kylepoyar.substack.com/p/2025-saas-benchmarks-report), [Tidemark VSKP](https://www.tidemarkcap.com/post/2025-vertical-smb-saas-benchmark-report) |
-| SMB churn: wide disagreement (annual 11–25%; monthly 2–5%) | benchmark | [S] |
-| Average revenue per account (ARPA) | A$260 / 360 / 480 a month | [A] |
-| Monthly logo churn | 3.0% / 2.0% / 1.2% | [A] |
-| Blended CAC | A$4,000 / 2,500 / 1,500 | [A] |
-| Hosting (AU region, managed database, backups, monitoring) | A$350–600 a month fixed + A$7–12 per customer | [A] (AWS/Azure Sydney prices not verified in this session) |
-| Support cost | 1 FTE per 40 / 60 / 90 customers at A$95k + 15% on-costs; founder covers at least 0.15 FTE early | [A] |
-| Payment processing | 2% of revenue | [A] |
-| SaaS tools | A$400 a month | [A] |
-| Bootstrapped fixed cost | Founder unpaid + 0.5 contract developer ≈ A$6,500 a month | [A] |
-| Funded fixed cost | Founder + 2 developers at A$130k + 15% ≈ A$37,375 a month | [A] |
+| Item | Status |
+|---|---|
+| Competitor prices | **[V]/[S]**, Section 5 |
+| Every cost input (support A$152 per customer, hosting A$9 per customer + A$450 base, card fees 2%, migration A$20, refunds A$7, contractor A$6,500 a month, tools, insurance, accountant, acquisition A$1,500 a month, startup A$73,000) | **[E] all estimates**, reasoning in `founder/cfo-sources.md`. AU cloud prices were not verified (blocked pages) |
+| SMB SaaS benchmarks (CAC ~US$1,100–1,400; payback 9–16 months; churn wide-ranging) | **[S]** secondary summaries: [Tidemark](https://www.tidemarkcap.com/post/2025-vertical-smb-saas-benchmark-report), [Kyle Poyar](https://kylepoyar.substack.com/p/2025-saas-benchmarks-report) |
 
-Model script: `model.py` (kept in the session scratchpad, not committed). It reproduces every number below.
+### 8.2 Year 1 as planned (Founder CFO tool, `founder/cfo.md`)
 
-### 8.2 Scenario results by customer count (AUD a month unless stated)
+Founding price A$262 blended. The ramp is 0 customers in months 1–3, then 1, 2, 3, 5, 7, 9, 10, 12 and 14 by month 12. This was checked against the panel: 10% is an upper bound, so 14 customers needs about 280 real conversations at a 5% conversion.
 
-**Conservative:** ARPA A$260, churn 3% a month, CAC A$4,000
+| Key number | Value |
+|---|---|
+| Contribution per customer-month | **A$66 (25%)** |
+| Break-even | **141 paying customers** |
+| Year 1 operating result | **−A$107,442** on A$16,506 revenue |
+| After the A$73,000 startup spend | −A$180,442 |
+| Cash needed before it pays for itself | **A$180,442** |
+| What-ifs (tool) | Price −10% → break-even 234; volume −20% → year 1 −A$108,274; unit costs +15% → break-even 255 |
 
-| Customers | MRR | ARR | Infra | Support | Pay fees | COGS | Gross margin | CAC for cohort |
-|---|---|---|---|---|---|---|---|---|
-| 5 | 1,300 | 15,600 | 660 | 1,366 | 26 | 2,052 | −58% | 20,000 |
-| 10 | 2,600 | 31,200 | 720 | 2,276 | 52 | 3,048 | −17% | 40,000 |
-| 25 | 6,500 | 78,000 | 900 | 5,690 | 130 | 6,720 | −3% | 100,000 |
-| 50 | 13,000 | 156,000 | 1,200 | 11,380 | 260 | 12,840 | 1% | 200,000 |
-| 100 | 26,000 | 312,000 | 1,800 | 22,760 | 520 | 25,080 | 4% | 400,000 |
+### 8.3 Steady-state scenarios at list price (5 / 10 / 25 / 50 / 100 customers)
 
-Contribution per customer ≈ A$15 a month; LTV ≈ A$507; LTV:CAC 0.1. **Never breaks even.** Low ARPA plus heavy support makes the business structurally unprofitable.
+Same cost structure as `numbers.json`. "Operating result" is after the bootstrapped fixed costs (A$8,850 + A$450 hosting base) and after the cost of replacing churned customers. The realistic contribution matches the CFO tool within A$1 (A$179 vs A$178, card-fee rounding).
 
-**Realistic:** ARPA A$360, churn 2% a month, CAC A$2,500
+**Conservative**: ARPA A$300, support A$180, CAC A$4,000, churn 3% a month [E]
 
-| Customers | MRR | ARR | Infra | Support | Pay fees | COGS | Gross margin | CAC for cohort |
-|---|---|---|---|---|---|---|---|---|
-| 5 | 1,800 | 21,600 | 495 | 1,366 | 36 | 1,897 | −5% | 12,500 |
-| 10 | 3,600 | 43,200 | 540 | 1,517 | 72 | 2,129 | 41% | 25,000 |
-| 25 | 9,000 | 108,000 | 675 | 3,793 | 180 | 4,648 | 48% | 62,500 |
-| 50 | 18,000 | 216,000 | 900 | 7,587 | 360 | 8,847 | 51% | 125,000 |
-| 100 | 36,000 | 432,000 | 1,350 | 15,174 | 720 | 17,244 | 52% | 250,000 |
+| Customers | MRR | ARR | Hosting/mo | Support/mo | Other direct | Gross margin | CAC (one-off) | Churn CAC/mo | Operating result/mo |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 5 | 1,500 | 18,000 | 510 | 900 | 180 | −6% | 20,000 | 600 | −9,540 |
+| 10 | 3,000 | 36,000 | 570 | 1,800 | 360 | 9% | 40,000 | 1,200 | −9,780 |
+| 25 | 7,500 | 90,000 | 750 | 4,500 | 900 | 18% | 100,000 | 3,000 | −10,500 |
+| 50 | 15,000 | 180,000 | 1,050 | 9,000 | 1,800 | 21% | 200,000 | 6,000 | −11,700 |
+| 100 | 30,000 | 360,000 | 1,650 | 18,000 | 3,600 | 22% | 400,000 | 12,000 | −14,100 |
 
-Contribution ≈ A$192 a month; LTV ≈ A$9,600; CAC payback ≈ 13 months; LTV:CAC ≈ 3.8.
-**Break-even:** about **52 customers** bootstrapped (MRR about A$18.6k); about **269 customers** funded (MRR about A$97k). **269 customers is roughly 11–18% of the estimated SAM.**
+**Never breaks even.** Contribution A$72 is less than the A$120 a month it costs to replace churned customers. LTV:CAC 0.6.
 
-**Optimistic:** ARPA A$480, churn 1.2% a month, CAC A$1,500
+**Realistic**: ARPA A$374, support A$152, CAC A$2,500, churn 2% a month [E]
 
-| Customers | MRR | ARR | Infra | Support | Pay fees | COGS | Gross margin | CAC for cohort |
-|---|---|---|---|---|---|---|---|---|
-| 5 | 2,400 | 28,800 | 385 | 1,366 | 48 | 1,799 | 25% | 7,500 |
-| 10 | 4,800 | 57,600 | 420 | 1,366 | 96 | 1,882 | 61% | 15,000 |
-| 25 | 12,000 | 144,000 | 525 | 2,529 | 240 | 3,294 | 73% | 37,500 |
-| 50 | 24,000 | 288,000 | 700 | 5,058 | 480 | 6,238 | 74% | 75,000 |
-| 100 | 48,000 | 576,000 | 1,050 | 10,116 | 960 | 12,126 | 75% | 150,000 |
+| Customers | MRR | ARR | Hosting/mo | Support/mo | Other direct | Gross margin | CAC (one-off) | Churn CAC/mo | Operating result/mo |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 5 | 1,870 | 22,440 | 495 | 760 | 172 | 24% | 12,500 | 250 | −8,657 |
+| 10 | 3,740 | 44,880 | 540 | 1,520 | 345 | 36% | 25,000 | 500 | −8,015 |
+| 25 | 9,350 | 112,200 | 675 | 3,800 | 862 | 43% | 62,500 | 1,250 | −6,087 |
+| 50 | 18,700 | 224,400 | 900 | 7,600 | 1,724 | 45% | 125,000 | 2,500 | −2,874 |
+| 100 | 37,400 | 448,800 | 1,350 | 15,200 | 3,448 | 47% | 250,000 | 5,000 | +3,552 |
 
-Contribution ≈ A$362 a month; LTV ≈ A$30,200; CAC payback ≈ 4 months; LTV:CAC ≈ 20.
-**Break-even:** about **21 customers** bootstrapped; about **111 customers** funded.
+**Break-even: 72 customers bootstrapped** (MRR ~A$27k); **313 customers with a funded three-person team** (MRR ~A$117k, 13–21% of the whole SAM). LTV:CAC 3.6; CAC payback 14 months.
 
-### 8.3 What the numbers say
+**Optimistic**: ARPA A$450, support A$100, CAC A$1,500, churn 1.2% a month [E]
 
-1. **Support cost decides profitability, more than hosting.** Hosting is under 5% of revenue in every scenario. Support for non-technical operators running a business-critical dispatch tool is the real cost of goods. **Build self-service onboarding and in-app guidance early.**
-2. **ARPA below about A$300 does not work** at realistic support ratios. That argues *against* cutting prices to win deals, and *for* charging setup fees and annual prepayment.
-3. **Raising venture funding to build a large team is the wrong move now.** A funded team needs about 111–269 customers to break even, which is about 4–18% of the whole SAM. Stay bootstrapped until the realistic scenario's metrics (churn ≤2%, CAC ≤A$2,500) are proven.
-4. **100 customers in the realistic case is A$432k ARR.** That is a good small business, not a venture outcome.
+| Customers | MRR | ARR | Hosting/mo | Support/mo | Other direct | Gross margin | CAC (one-off) | Churn CAC/mo | Operating result/mo |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 5 | 2,250 | 27,000 | 485 | 500 | 145 | 50% | 7,500 | 90 | −7,820 |
+| 10 | 4,500 | 54,000 | 520 | 1,000 | 290 | 60% | 15,000 | 180 | −6,340 |
+| 25 | 11,250 | 135,000 | 625 | 2,500 | 725 | 66% | 37,500 | 450 | −1,900 |
+| 50 | 22,500 | 270,000 | 800 | 5,000 | 1,450 | 68% | 75,000 | 900 | +5,500 |
+| 100 | 45,000 | 540,000 | 1,150 | 10,000 | 2,900 | 69% | 150,000 | 1,800 | +20,300 |
+
+**Break-even: 31 customers bootstrapped; 136 funded.** LTV:CAC 17.4; payback 5 months.
+
+**What this says:**
+1. **Support cost, not hosting, decides the business.** Hosting is under 5% of revenue at 25+ customers.
+2. **Do not raise venture money for a team now.** A funded team needs 136–313 customers just to break even.
+3. **100 customers in the realistic case is about A$449k ARR.** That is a good small business, not a venture outcome.
 
 ---
 
 ## 9. MVP Recommendations
 
-### 9.1 Is the feature list too big? **Yes.**
+**Is the feature list too big? Yes.** The Product lens called it "a suite, not a product". The pack's strongest version is one workflow.
 
-The proposed scope covers fleet, drivers, bookings, customers, scheduling, operations, tracking, reporting, maintenance, performance and finance. That is **five or more products**. Each competitor took years to build its depth. A solo or small team trying to ship all of it will ship nothing good.
+**Essential MVP ("Clash-Free Charter Desk"):**
+1. Enquiries and customers.
+2. A fast quote builder (rules by distance and time; PDF or email; online acceptance).
+3. A calendar allocation of vehicles and drivers with **clash blocking**.
+4. **Expiry blocking** for driver authority or licence, Working With Children Check where relevant, and vehicle registration or inspection.
+5. A driver run sheet **sent by SMS link (no app install)**, with a printable PDF fallback.
+6. Invoices with **Xero sync**.
+7. A simple monthly dashboard.
+8. **Full Excel/CSV export** (it is a written guarantee).
 
-### 9.2 Essential MVP (one workflow, done excellently)
+**Postpone:** live GPS (integrate later), full workshop maintenance (service reminders only), route timetabling, ticketing and passenger apps, advanced BI, multi-depot, AI optimisation, MYOB.
 
-**Quote → Booking → Allocation → Run sheet → Completion → Invoice**
+**Differentiators to validate:**
+- **Done-for-you migration** (the most-cited flip condition).
+- Clash and compliance blocking.
+- An accreditation evidence pack mapped to the TfNSW BOAS audit tool **[V]** (phase 2).
+- An SMS run sheet for non-technical drivers.
 
-1. Customer and booking records (with an enquiry pipeline).
-2. Fast quote builder (distance and time rules, PDF/email quote, online acceptance).
-3. Calendar-based vehicle and driver allocation with **clash detection** (double-booked vehicle, driver unavailable, licence or accreditation expired).
-4. Driver run sheet on mobile (web app is fine): job details, contacts, pickup times, check-in/complete.
-5. Basic vehicle and driver register with **expiry alerts** (registration, inspection, driver authority or licence, Working With Children Check where relevant).
-6. Invoice generation and **Xero sync** (MYOB second).
-7. Simple dashboard: bookings, revenue and utilisation for the month.
+**Expensive to maintain:**
+- Telematics integrations across many vendors.
+- Payments (PCI scope, chargebacks).
+- Accounting APIs.
+- Compliance rules for every state, which change.
+- Fatigue/EWD logic. **Never build it**; integrate with approved vendors.
+- Offline mobile sync.
 
-### 9.3 Postpone
+**Integrations, in order:** Xero → email and SMS → Stripe or GoCardless deposits → read-only telematics (Teletrac Navman, EROAD, MTData) → MYOB.
 
-- Live GPS tracking (integrate with existing telematics later; don't build it).
-- Full maintenance and workshop management (start with service-due reminders only).
-- Route and timetable scheduling for route services.
-- Passenger-facing apps and ticketing.
-- Advanced BI and financial reporting.
-- Multi-depot and enterprise permissions.
-- AI optimisation.
+**Security and privacy:**
+- **Host in Australia**, and say so in writing (the panel asked).
+- MFA, per-tenant isolation, encryption, audit logs, tested backups.
+- Collect minimal sensitive data: licence numbers, WWCC, police checks, and **children's names** on excursions.
+- Design to the APPs even if the small-business exemption applies; its removal is on the reform agenda **[S]** ([SmartCompany](https://www.smartcompany.com.au/business-advice/privacy-act-small-business-exemption-government-report/), [IAPP](https://www.iapp.org/news/a/amending-australias-privacy-act-small-businesses-bigger-responsibilities)).
+- Prepare for the Notifiable Data Breaches scheme.
+- Guarantees must respect the Australian Consumer Law (`founder/ops.md`).
 
-### 9.4 Potential differentiators (to validate)
+**Scalability:** technically modest (≤2,500 tenants). A plain multi-tenant web app is enough; no microservices before about 100 customers.
 
-- **Accreditation audit pack:** one-click export of the evidence the BOAS audit tool asks for **[V]**. Map it to the TfNSW audit tool first, then the Victorian and Queensland equivalents.
-- **Speed to quote:** a public quote form that turns into a priced quote in minutes.
-- **Clash-proof allocation** with compliance checks built into dispatch.
-- **Fixed-price onboarding with data migration** done for the customer.
+**Phased roadmap:**
 
-### 9.5 Features that become expensive to maintain
-
-- **Live GPS and telematics hardware:** device support, connectivity and integrations with many vendors.
-- **Payments:** PCI scope, chargebacks, reconciliation. Use Stripe-hosted flows only.
-- **Accounting integrations:** Xero and MYOB API changes, mapping edge cases.
-- **Compliance rules for every state:** rules differ between NSW, VIC, QLD, WA and others, and they change (the TfNSW BOAS guidance was updated in 2025 **[V]**).
-- **Fatigue and EWD logic:** heavy-vehicle fatigue rules carry legal liability. Integrate with an approved EWD vendor; do not build one.
-- **Offline driver apps** for regional areas with poor reception.
-
-### 9.6 Integration requirements (priority order)
-
-1. Xero (most important), then MYOB.
-2. Email/SMS (transactional providers).
-3. Stripe or another payment gateway for deposits.
-4. Telematics read-only (Teletrac Navman, EROAD, MTData) via their APIs, in phase 3.
-5. Calendar export (ICS) for drivers and customers.
-
-### 9.7 Security and privacy
-
-- **Privacy Act 1988:** many small operators are currently exempt under the A$3M turnover threshold. The Government has **agreed in principle to remove the small-business exemption**, and that change is expected in a later tranche of reforms **[S]** ([SmartCompany](https://www.smartcompany.com.au/business-advice/privacy-act-small-business-exemption-government-report/); [IAPP](https://www.iapp.org/news/a/amending-australias-privacy-act-small-businesses-bigger-responsibilities)). **Design as though the APPs apply**, because your enterprise-grade customers and schools will require it.
-- Sensitive data: driver licences, Working With Children Check numbers, police check results, passenger names (including **children** on school excursions), and medical or accessibility notes. Collect the minimum. Encrypt at rest. Use role-based access. Keep audit logs.
-- **Host in Australia** (AU region). Schools and government-linked customers will ask.
-- Multi-factor authentication for admins; per-tenant data isolation; daily backups with tested restores.
-- Notifiable Data Breaches scheme readiness: an incident response plan.
-- In the longer term: SOC 2 or ISO 27001 for larger customers. TransportMe already holds ISO 27001 **[V-vendor]**.
-
-### 9.8 Scalability requirements
-
-The technical scale is modest: about 2,500 tenants, each with tens of vehicles. A standard multi-tenant web stack on managed cloud services handles this easily. **Scalability is a commercial problem, not a technical one.** Do not over-engineer (no microservices, no Kubernetes) before about 100 customers.
-
-### 9.9 Phased roadmap
-
-| Phase | Timing | Scope | Exit criterion |
+| Phase | When | Scope | Exit criterion |
 |---|---|---|---|
-| 0: Validate | Months 0–3 | Interviews, clickable prototype, pricing tests, pre-sales | 10 operators commit with a deposit or prepayment |
-| 1: MVP | Months 3–6 | Section 9.2 scope for 3–5 design partners | Design partners run all real charter jobs in the system for 4 weeks |
-| 2: Paid launch | Months 6–12 | Xero, quote form, compliance alerts, audit pack v1 | 25 paying customers, monthly churn ≤2%, NPS ≥30 |
-| 3: Expand | Months 12–24 | Telematics read integration, service-due maintenance, deposits/payments, MYOB | 75–100 customers; CAC payback ≤12 months |
-| 4: Optional | Months 24+ | NZ, adjacent segments (shuttles, tour operators), analytics | Only if Phases 2–3 metrics hold |
+| 0: Deposit test | Nov 2026 – Mar 2027 | Interviews, clickable prototype, founding-place deposits | **≥5 deposits from 30 conversations by 31 March 2027** (stop if <2) |
+| 1: MVP with design partners | Apr – Sep 2027 | Section 9 essentials only | 3–5 depositors run real charter jobs in it for 4 weeks |
+| 2: Paid founding cohort | Jul 2027 – Jan 2028 | Xero hardening, audit pack v1, self-serve onboarding | 10–25 paying customers, monthly churn ≤2%, support ≤A$152 per customer |
+| 3: Expand | 2028 | Telematics read, service reminders, deposits/payments, MYOB | 50–75 customers; CAC payback ≤14 months |
+| 4: Optional | 2029+ | NZ; adjacent segments (shuttle, tour) | Only if phase 3 holds |
 
 ---
 
 ## 10. Customer Acquisition Strategy
 
-### 10.1 Channels (ranked)
+From `founder/marketing.md` and `founder/launch.md`.
 
-1. **Founder-led direct outreach:** phone, then visit the depot. Small operators buy from people they trust. Expect 20–40 conversations per paying customer early on **[A]**.
-2. **Industry associations:** BusNSW (~950 accredited operators in its state **[S]**), BusVic, QBIC (Queensland), BIC (national, 160+ members **[S]**). Sponsor a regional meeting and offer a member discount.
-3. **Australasian Bus & Coach Expo** and state conferences. eCoachManager exhibits there **[V-vendor]**, so the buyers attend.
-4. **Accreditation and compliance consultants and auditors:** a referral partnership in return for the audit pack.
-5. **Referrals:** one free month for each referral that converts.
-6. **Content and SEO:** "how to prepare for a BOAS audit", "bus charter quote template". Slow, but compounding.
-7. **Broker marketplaces (BusCharter.com.au and similar):** a possible integration partner that sends bookings into MA Transport.
+- **Positioning (recommended):** *"For growing charter operators who are outgrowing the whiteboard, MA Transport is the charter desk that makes double-bookings and unqualified-driver allocations impossible, unlike spreadsheets or older desktop charter systems."*
+- **Channels:**
+  1. State bus associations (BusNSW, BusVic, QBIC).
+  2. Founder depot visits with a **live import of the operator's own week**.
+  3. Referrals from founding operators.
+  Not yet: paid ads or an expo stand.
+- **Maximum acquisition cost:** about A$1,400 per customer at list price. In year 1 (A$66 contribution), acquisition must be **founder time, not paid spend**.
+- **Campaign:** the founding program opens **Tuesday 2 February 2027**, after peak season. A dated plan runs from 19 January to 18 February in `marketing.md`. Ten hooks each answer a panel objection.
+- **Brand note** (`founder/brand.md`): "MA Transport" reads like a bus operator, not software. Consider a product name such as **CharterDesk** (run the IP Australia class 9/42 search and domain checks first).
 
-**Not recommended early:** broad paid search or social ads. The audience is small and niche, so cost per lead will be high.
+### 10.1 First 20 potential customers (prospects only; none committed)
 
-### 10.2 First 20 potential customers (prospects only, none committed)
+Fleet sizes are self-reported in directories or on websites unless marked. Decision-makers are **assumed** to be the owner/MD and the operations or charter manager; confirm by phone or LinkedIn. Likely problems are **[E]**.
 
-Fleet sizes are **self-reported by the operator in directories or on their own websites**, unless marked otherwise. None is a committed customer. Decision-makers are **assumed** to be the owner/MD and the operations or charter manager; confirm on LinkedIn or by phone.
-
-| # | Operator | Location | Fleet (as found) | Likely problems [A] | Approach |
+| # | Operator | Location | Fleet (as found) | Likely problem | Approach |
 |---|---|---|---|---|---|
-| 1 | Alura Coaches | Caringbah, NSW | NPD; family-owned since 1926 [S] ([The Leader](https://www.theleader.com.au/story/9351766/alura-coaches-100-years-of-trusted-service-in-the-shire/)) | Legacy processes, excursion peaks | Warm intro via BusNSW; centenary angle |
-| 2 | AusCoach | Alexandria, NSW | "Fleet of coaches", NPD [S] ([Sydney.com](https://www.sydney.com/destinations/sydney/inner-sydney/alexandria-and-rosebery/transport/auscoach)) | School and corporate scheduling | Direct call to owner |
-| 3 | Marulan Coaches | Marulan, NSW | NPD; family-run (Hale family) [S] ([VisitNSW](https://www.visitnsw.com/id/destinations/country-nsw/goulburn-area/goulburn/transport/marulan-coaches)) | Regional excursion and camp logistics | Depot visit |
-| 4 | Coastal Liner | Central Coast, NSW | "Large fleet", NPD [S] ([CC Mariners](https://ccmariners.com.au/?p=885)) | Touring plus charter mix | Direct |
-| 5 | North Sydney Bus Charters | Sydney, NSW | NPD [S] ([site](https://northsydneybuscharters.com.au/services/school-bus/)) | School booking volume | Direct |
-| 6 | Destination Coaches | Marrickville, NSW | NPD [S] ([Sydney.com](https://www.sydney.com/destinations/sydney/inner-sydney/marrickville/transport/destination-coaches)) | Corporate and event allocation | Direct |
-| 7 | Prestige Coach Hire | Springwood, NSW | NPD [S] ([VisitNSW](https://www.visitnsw.com/destinations/blue-mountains/katoomba-area/springwood/transport/prestige-coach-hire)) | Tour and charter quoting | Direct |
-| 8 | Bathurst Coach Travel | Bathurst, NSW | NPD [S] ([VisitNSW](https://www.visitnsw.com/destinations/country-nsw/bathurst-area/bathurst/transport/bathurst-coach-travel)) | Regional events peaks | Direct |
-| 9 | Austwide Coaches | NSW | NPD [S] ([site](https://austwidecoaches.com.au/about/)) | Multi-region charter | Direct |
-| 10 | Victoria Coaches | North Melbourne, VIC | **14 buses and coaches**, 21–57 seats [S, self-reported] ([Yellow Pages](https://www.yellowpages.com.au/north-melbourne-vic/bpp/victoria-coaches-577768230)) | Weddings and corporate scheduling | **Ideal ICP fit.** Direct visit |
-| 11 | Crown Coaches | VIC | NPD; family-run since 1967; accredited [S] ([Yellow Pages](https://www.yellowpages.com.au/nationwide/bpp/crown-coaches-pty-ltd-580288844)) | School plus charter compliance | Via BusVic |
-| 12 | Alston Coaches | Braeside, VIC | NPD [S] ([Australia's Guide](https://australiasguide.com/vic/transport-hire/kingston/braeside/alston-coaches/)) | Corporate events | Direct |
-| 13 | Quince's Coaches | Melbourne, VIC | NPD [S] ([site](https://quinces.com.au/bus-charter-melbourne)) | Event charter peaks | Direct |
-| 14 | Harlan Transport | Melbourne, VIC | NPD; coaches, midis, minibuses [S] ([Easy Weddings](https://www.easyweddings.com.au/HensParty/Melbourne/HarlanTransport/)) | Mixed fleet allocation | Direct |
-| 15 | Sunstate Charters | Pinkenba, QLD | NPD; 30+ years [S] ([Australia.com](https://australia.com/en/atdw/product.56b262682cbcbe7073adcce9.html)) | Transfers and tours, airport volume | Via QBIC |
-| 16 | Aries Queensland | Molendinar, QLD | NPD; corporate/MICE focus, 30 years [S] ([Experience Gold Coast](https://experiencegoldcoast.com/places-to-go/central-gold-coast/transport/aries-queensland--seqs-corporate-travel-specialist-au0958331)) | Event logistics with many vehicles | Direct |
-| 17 | Belbaker Bus Charter | Sunshine Coast, QLD | NPD [S] ([Easy Weddings](https://www.easyweddings.com.au/WeddingCars/SunshineCoast/BelbakerBusCharter)) | Wedding and event bookings | Direct |
-| 18 | Pinnacle Coachlines | Perth, WA | **30+ vehicles**, 10–61 seats [S, self-reported] ([site](https://pinnacle-coachlines.squarespace.com)) | Metro plus regional WA dispatch | Phone/video (phase 2 geography) |
-| 19 | Rove Charters | Greenwood, WA | NPD; 13–57 seat vehicles; est. 2017 [S] ([Australia's Guide](https://australiasguide.com/wa/transport-hire/joondalup/greenwood/rove-charters)) | Growing young business, likely spreadsheets | Phone/video |
-| 20 | Adelaide Coachlines | Edwardstown, SA | NPD; 21 and 57 seaters; family-run since 1960 [S] ([Yellow Pages](https://www.yellowpages.com.au/edwardstown-sa/bpp/adelaide-coaches-bus-hire-581360820)) | Local and interstate charter | Phone/video |
+| 1 | [Alura Coaches](https://www.theleader.com.au/story/9351766/alura-coaches-100-years-of-trusted-service-in-the-shire/) | Caringbah NSW | NPD; family-owned since 1926 | Excursion peaks, legacy processes | BusNSW intro |
+| 2 | [AusCoach](https://www.sydney.com/destinations/sydney/inner-sydney/alexandria-and-rosebery/transport/auscoach) | Alexandria NSW | NPD | School and corporate allocation | Direct call |
+| 3 | [Marulan Coaches](https://www.visitnsw.com/id/destinations/country-nsw/goulburn-area/goulburn/transport/marulan-coaches) | Marulan NSW | NPD; Hale family | Camps and excursions | Depot visit |
+| 4 | [Coastal Liner](https://ccmariners.com.au/?p=885) | Central Coast NSW | "Large fleet", NPD | Touring + charter mix | Direct |
+| 5 | [North Sydney Bus Charters](https://northsydneybuscharters.com.au/services/school-bus/) | Sydney NSW | NPD | School booking volume | Direct |
+| 6 | [Destination Coaches](https://www.sydney.com/destinations/sydney/inner-sydney/marrickville/transport/destination-coaches) | Marrickville NSW | NPD | Event allocation | Direct |
+| 7 | [Prestige Coach Hire](https://www.visitnsw.com/destinations/blue-mountains/katoomba-area/springwood/transport/prestige-coach-hire) | Springwood NSW | NPD | Tour quoting | Direct |
+| 8 | [Bathurst Coach Travel](https://www.visitnsw.com/destinations/country-nsw/bathurst-area/bathurst/transport/bathurst-coach-travel) | Bathurst NSW | NPD | Regional event peaks | Direct |
+| 9 | [Austwide Coaches](https://austwidecoaches.com.au/about/) | NSW | NPD | Multi-region charter | Direct |
+| 10 | [Victoria Coaches](https://www.yellowpages.com.au/north-melbourne-vic/bpp/victoria-coaches-577768230) | North Melbourne VIC | **14 vehicles, 21–57 seats** (self-reported) | Weddings and corporate scheduling | **Best ICP fit**: visit |
+| 11 | [Crown Coaches](https://www.yellowpages.com.au/nationwide/bpp/crown-coaches-pty-ltd-580288844) | VIC | NPD; since 1967 | School + charter compliance | BusVic |
+| 12 | [Alston Coaches](https://australiasguide.com/vic/transport-hire/kingston/braeside/alston-coaches/) | Braeside VIC | NPD | Corporate events | Direct |
+| 13 | [Quince's Coaches](https://quinces.com.au/bus-charter-melbourne) | Melbourne VIC | NPD | Event peaks | Direct |
+| 14 | [Harlan Transport](https://www.easyweddings.com.au/HensParty/Melbourne/HarlanTransport/) | Melbourne VIC | NPD; mixed fleet | Mixed-fleet allocation | Direct |
+| 15 | [Sunstate Charters](https://australia.com/en/atdw/product.56b262682cbcbe7073adcce9.html) | Pinkenba QLD | NPD; 30+ years | Transfers and tours | QBIC |
+| 16 | [Aries Queensland](https://experiencegoldcoast.com/places-to-go/central-gold-coast/transport/aries-queensland--seqs-corporate-travel-specialist-au0958331) | Molendinar QLD | NPD; corporate/MICE | Many-vehicle events | Direct |
+| 17 | [Belbaker Bus Charter](https://www.easyweddings.com.au/WeddingCars/SunshineCoast/BelbakerBusCharter) | Sunshine Coast QLD | NPD | Wedding/event bookings | Direct |
+| 18 | [Pinnacle Coachlines](https://pinnacle-coachlines.squarespace.com) | Perth WA | **30+ vehicles, 10–61 seats** (self-reported) | Metro + regional dispatch | Video (phase 2) |
+| 19 | [Rove Charters](https://australiasguide.com/wa/transport-hire/joondalup/greenwood/rove-charters) | Greenwood WA | NPD; est. 2017 | Young, growing; likely spreadsheets | Video |
+| 20 | [Adelaide Coachlines](https://www.yellowpages.com.au/edwardstown-sa/bpp/adelaide-coaches-bus-hire-581360820) | Edwardstown SA | NPD; since 1960 | Local + interstate charter | Video |
 
-Reserves: Goldrush Tours (WA), Perth Bus and Coach Charter (WA), Cooee Tours (multi-depot QLD/NSW), VicBus (Mount Evelyn, minibuses), Kangaroo Bus Lines (QLD, a known legacy-system replacement, though it may already have chosen a vendor).
+18 of 20 fleet sizes are **not publicly disclosed**. Look them up in the [Australian Bus Fleet Lists](https://opendata.transport.nsw.gov.au/data/dataset/australian-bus-fleet-lists) or ask in the first call. **Screen for "growing" first**: ask "how many vehicles did you add in the last two years?"
 
-**Fleet sizes:** 18 of the 20 are not publicly disclosed. Ask in the first call, or look them up in the [Australian Bus Fleet Lists](https://opendata.transport.nsw.gov.au/data/dataset/australian-bus-fleet-lists).
+### 10.2 Validating willingness to pay before building (from `/founder-launch`)
 
-### 10.3 How to validate willingness to pay before building heavily
-
-1. **Problem interviews (weeks 1–4):** 20 operators. Do not pitch. Ask: "Walk me through the last charter from enquiry to payment." Record the tools used, the time spent and the errors, and what they currently pay for software.
-2. **Quantify the pain:** admin hours per week × wage, lost quotes, double-bookings per year, audit findings.
-3. **Clickable prototype demo (weeks 4–8):** show the core workflow only.
-4. **Ask for money:** a founding-customer deal with a **refundable deposit** (for example one month in advance) or a 12-month prepay at a discount. **A verbal "I'd use that" counts for nothing.**
-5. **Concierge MVP:** for 2–3 operators, run their bookings in your prototype plus a spreadsheet, so you learn the edge cases before you code them.
-6. **Kill criteria:** if fewer than **5 of 20** interviewed operators agree to a paid pilot or deposit at A$149 or more a month, **stop or pivot**.
+1. **Interviews (from now):** 20-minute phone calls during peak season, with the **four Van Westendorp price questions asked for real** (feed the CSV into `van_westendorp.py`).
+2. **Clickable prototype plus a live import** of the operator's real week into a mock-up.
+3. **A refundable deposit** of one month at the founding price, refundable if the product isn't live by 30 June 2027.
+4. **Success line:** ≥5 deposits from ≥30 conversations by 31 March 2027. **Stop line:** <2. Trust the real buyers over the panel.
 
 ---
 
 ## 11. Risk Assessment
 
+From `founder/ops.md` plus the board.
+
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
-| Operators won't pay (spreadsheets are "good enough") | **High** | **Critical** | Deposits and prepayment before building; target trigger events |
-| An incumbent undercuts (Coach Manager at A$137–385) | High | High | Differentiate on UX, compliance pack and migration, not price |
-| Support load destroys margin (Section 8) | High | High | Self-serve onboarding, paid setup, templates, knowledge base |
-| Scope creep into a "complete TMS" | **High** | High | Strict MVP; a written "not now" list |
-| Long sales cycles for a low price | Medium–High | Medium | Associations, referrals, short trials with clear success criteria |
-| International player localises (Moovs, Busie) | Medium | High | Win AU compliance depth and local relationships first |
-| Telematics vendors add booking modules | Medium | High | Integrate with them; consider partnering |
-| Small market caps growth | **High** (structural) | High | Accept a bootstrapped path, or plan NZ/UK expansion early |
-| Data breach (children, driver checks) | Low–Medium | Critical | Security basics, AU hosting, minimal data, incident plan |
-| Compliance logic errors creating liability | Medium | High | Present alerts as reminders, not legal advice; terms of service; no fatigue/EWD calculation |
-| Key-person dependency (solo founder) | High | High | Documentation; a co-founder with industry sales credibility |
-| Seasonality (school terms, wedding season) causes churn in quiet months | Medium | Medium | Annual billing discount |
-
-### Technical risks specifically
-
-- Mobile driver experience with poor regional coverage (offline sync is hard).
-- Data migration from varied spreadsheets and legacy tools.
-- Accounting integration edge cases (GST, partial payments, credit notes).
-- Calendar and allocation logic: multi-day tours, split shifts, vehicle swaps.
+| **No operator pays (trust and habit)** | **High** | **Fatal** | Deposits before build; the stop line |
+| Support cost per customer above A$152 | High | High | Self-serve onboarding; paid setup; cap the founding cohort at 10 |
+| Founder burnout (sales, support, migration) | High | High | Cap the cohort; hire support at ~40–60 customers |
+| Outage on a live run | Medium | High | Offline PDF run sheets, status page, founder phone |
+| Migration errors cause a real double-booking | Medium | High | Clash report signed off by the owner before go-live |
+| An incumbent cuts price or copies features | Medium | Medium | Win on migration, support, AU compliance |
+| International player localises (Moovs) | Medium | High | AU compliance depth and association relationships |
+| Peak-season timing blocks adoption | High | Medium | Onboard Feb–Oct only |
+| Data breach (children's, driver data) | Low–Medium | Critical | Minimal data, AU hosting, MFA, incident plan |
+| Compliance warning wrong | Low | High | Present it as a reminder, not certification; tests; terms |
+| Small market caps growth | High (structural) | High | Accept a bootstrapped path or plan NZ early |
 
 ---
 
-## 12. 90-Day Execution Roadmap
+## 12. 90-Day Execution Roadmap (23 November 2026 – 28 February 2027)
 
-| Week | Focus | Deliverables | Success metric |
-|---|---|---|---|
-| 1–2 | Setup | Interview script, CRM of 60 prospects (Section 10.2 plus fleet-list research), BusNSW/BusVic membership enquiries, price-sensitivity questions | 60 prospects listed with phone and owner name |
-| 3–6 | Problem discovery | 20 interviews (recorded with consent), pain quantified per operator, current-tools inventory, competitor mentions | 20 interviews done; top 3 pains ranked by frequency × cost |
-| 5–6 | Competitive teardown | Trial or demo of Coach Manager, eCoachManager, Moovs; ask TransportMe and Busable for quotes; document gaps | Written comparison of 5 products |
-| 7–8 | Solution design | Clickable prototype of quote → allocate → run sheet → invoice; pricing page with 2–3 variants | Prototype tested with 8+ operators |
-| 9–10 | Monetisation test | Founding-customer offer: deposit or annual prepay | **≥5 paid commitments**, at least A$149/mo equivalent |
-| 11–12 | Go/no-go | Decision memo: build MVP / pivot segment / stop. If go: MVP spec limited to Section 9.2 | Decision made on evidence, not effort already spent |
-| 13 | Start MVP (if go) | Sprint 1 with 3 design partners | Design partners onboarded |
-
-**Budget for 90 days [A]:** about A$3–8k (association memberships, travel to depots, prototype tools, the expo if timing allows). No significant development spend until week 12.
+| Weeks | Dates | Focus | Deliverable | Metric |
+|---|---|---|---|---|
+| 1 | 23–29 Nov | Set-up | Interview script with the 4 price questions; CRM of 60 prospects; association enquiries | 60 prospects with an owner name |
+| 2–4 | 30 Nov – 20 Dec | Peak-season phone interviews | 15 interviews; pain in A$ and hours; current tools and costs | 15 done; top 3 pains ranked |
+| 5–6 | 21 Dec – 10 Jan | Prototype and legal | Clickable prototype of the one workflow; terms and refund wording reviewed | Prototype shown to 3 operators |
+| 7–8 | 11–24 Jan | Competitor teardown and brand | Trials/demos of Coach Manager, eCoachManager, Moovs; quotes from TransportMe and Busable; IP Australia/domain checks; developer quotes | Written comparison; 3 developer quotes |
+| 9 | 25 Jan – 1 Feb | Pre-campaign | L−14 to L−1 activities (`marketing.md`) | 10 demos booked |
+| 10–13 | 2 – 28 Feb | **Founding program open** | Depot visits with live imports; deposit asks; association talk | **≥15 conversations a week; first deposits** |
+| 14 (just after) | by 31 Mar | **Go/no-go** | Build decision on the deposit line | ≥5 deposits → build; <2 → stop |
 
 ---
 
 ## 13. Final Investment Recommendation
 
-### 13.1 Scorecard
+### 13.1 Scores
 
-| Category | Score /10 | Reasoning |
+| Category | /10 | Reason (pack evidence) |
 |---|---|---|
-| Market opportunity | **4** | SAM ≈ A$6–11M ARR [A]; 618 interurban/rural businesses [S]; fine for bootstrapping, too small for VC |
-| Problem severity | **5** | Real, recurring, compliance-linked; but chronic, and spreadsheets "work" |
-| Product differentiation | **3** | Nothing built; the proposed scope matches what competitors already offer; differentiators are only hypotheses |
-| Competitive positioning | **3** | Late entrant against cheaper Australian incumbents and well-funded international players |
-| Business model | **6** | Per-fleet SaaS is sound, predictable and familiar; setup fees and payments can add revenue |
-| Pricing | **5** | Starter fine; Growth and Fleet above the main competitor; extra-bus price matches telematics |
-| Technical feasibility | **8** | Standard multi-tenant SaaS; the hard parts (telematics, EWD) can be postponed or integrated |
-| Customer acquisition | **4** | Small, relationship-driven, low-tech audience; associations help; CAC unproven |
-| Scalability | **4** | Technically easy; commercially capped in Australia; international means new competitors |
-| Financial viability | **4** | Conservative case never profitable; realistic case is profitable only bootstrapped (~52 customers) |
-| **Total** | **46 / 100** | Rounded to **45** to reflect zero customer evidence to date |
+| Market opportunity | **4** | 618 businesses (IBISWorld) and ~950 NSW operators; SAM ~A$7–11M; bootstrap-sized |
+| Problem severity | **4** | Real but chronic; 9 of 20 simulated buyers say current tools "work well enough"; no dollar figure from any operator |
+| Product differentiation | **2** | Board unanimous: no one thing, nothing 10x better; no gap proven |
+| Competitive positioning | **3** | Late entrant against cheaper AU incumbents; no references; "nobody I know uses it" |
+| Business model | **5** | Per-fleet SaaS is sound; onboarding fees and annual terms help; churn-replacement cost is high |
+| Pricing | **4** | Fleet above the panel's range and ~82% above Coach Manager; Starter on the edge; price cuts hurt economics |
+| Technical feasibility | **7** | Standard SaaS; the hard parts (GPS, EWD) can be integrated or postponed |
+| Customer acquisition | **3** | Trust-gated, relationship-driven, no channel tested; panel 0% → 10% even with a strong offer |
+| Scalability | **4** | Technically easy; commercially capped in AU |
+| Financial viability | **4** | Plan verdict Not yet; year 1 −A$107k; needs ~A$180k cash; conservative case never breaks even |
+| **Overall** | **40 / 100** | |
 
-### 13.2 Recommendation: **VALIDATE FIRST** (narrow scope; be ready to pivot)
+### 13.2 Recommendation: **PIVOT**
 
-**Why not BUILD:** there is no evidence of willingness to pay, cheaper incumbents exist, and building the full scope risks 12–18 months of development for a market that may not switch.
+**Why PIVOT and not VALIDATE FIRST:** validation only makes sense for the current concept if its assumptions are plausible. The pack says they are not, as pitched:
+- **The board voted 3 PASS.**
+- **0 of 20 simulated buyers bought** the "complete TMS for every operator" pitch, even though the panel is an upper bound.
+- **The computed plan verdict is Not yet.**
 
-**Why not STOP:** the problem is real, competitors prove that people pay, Australian compliance creates room for a locally focused product, technical risk is low, and a bootstrapped A$0.5–1M ARR business is achievable *if* validation succeeds.
+The direction needs significant changes, which is your definition of PIVOT:
+- **From** a complete TMS for all passenger operators, including large ones, **to** one workflow for growth-minded independent charter operators.
+- **From** "build, then sell" **to** "sell founding places with deposits, then build".
+- **From** A$199 / 399 / 699 **to** A$179 / 379 / 599, plus onboarding.
 
-**Why not PIVOT yet:** the core idea (SMB charter operations SaaS) is sound. What needs to change is **scope, segment and pricing**, which is a narrowing, not a new direction. If the 90-day validation fails, the most likely pivots are:
+**Why not STOP:** the offer re-test showed the objections *can* move. Migration done for the operator, a side-by-side trial and data guarantees took the panel from 0% to 10%, and a clear segment (growing operators) responded. The deposit test costs a few thousand dollars, not A$180,000. **If the deposit test fails (<2 deposits from 30 conversations by 31 March 2027), the right answer becomes STOP.**
 
-- (a) a compliance and accreditation audit tool sold across all bus operators, horizontally;
-- (b) a booking and quote front end that integrates with existing telematics and accounting tools;
-- (c) selling to brokers and marketplaces instead of operators.
+**What evidence would make it promising:** ≥5 real deposits; real operators putting a dollar figure on clash and admin pain; at least one operator willing to be a named reference after 60 days.
 
-### 13.3 Brutal founder review
+### 13.3 The five most important next actions
 
-- **Why MA Transport could fail:** it tries to build a "complete TMS" against 15+ existing products, without a reference customer, priced above the cheapest established Australian option, in a market of about 2,000 reachable businesses that change slowly.
-- **Why customers might refuse to pay:** spreadsheets cost nothing; switching risks their busiest season; they already pay for telematics; and Coach Manager does the core job for A$137–385.
-- **Why competitors could defeat you:** they have years of edge cases encoded, existing customers, government relationships (TransportMe), and the ability to cut prices or copy a nicer UI.
-- **Does the pricing leave enough profit?** Only above about A$300 ARPA, and only with low support needs. Below that, as in the conservative case, every customer loses money once support is counted.
-- **Is the market saturated?** Not saturated, but **served**. The question is not "is there room?" but "why you instead of a cheaper incumbent?". That answer does not exist yet.
-- **Is the target segment too broad?** **Yes.** Charter, route, school, shuttle, SME and enterprise are six different businesses. Choose one.
-- **Should you narrow the product?** **Yes, firmly.** One workflow (quote to invoice), one segment (5–30-vehicle charter operators), one region (east coast) to start.
-
-### 13.4 The five most important next actions
-
-1. **Run 20 operator interviews in the next 6 weeks**, using the Section 10.2 list and BusNSW/BusVic/QBIC introductions. Quantify the cost of the pain in dollars and hours.
-2. **Do a hands-on teardown of Coach Manager, eCoachManager and Moovs** (trials or demos), and get quotes from TransportMe and Busable. Write down exactly what you will do better, and confirm every price in Section 7 from the vendor's own page.
-3. **Re-scope to the quote → allocate → run sheet → invoice MVP**, with a written "not now" list (GPS, maintenance, ticketing, route scheduling, enterprise).
-4. **Test pricing with real money:** a founding-customer offer at about A$149–399 a month with a deposit or annual prepay, and a paid setup fee. Proceed only if **5 or more of 20** commit.
-5. **Get the real market count:** download the Australian Bus Fleet Lists and count operators with 5–30 vehicles by state, replacing the [A] SAM estimate. In parallel, send me the Founder Skill file so this report can be re-scored against its own rubric.
+1. **This week, book the first 5 operator phone interviews.** Twenty minutes each, peak-season friendly. Ask the four price questions for real and record the pain in dollars and hours. Screen for growing operators.
+2. **Do not commission the MVP build.** Spend only on the deposit test (prototype, association fees, travel) until the go/no-go on 31 March 2027.
+3. **Cut the scope in writing** to the "Clash-Free Charter Desk" workflow (Section 9), with a "not now" list covering GPS, maintenance, ticketing, route scheduling and large operators.
+4. **Change the price card and the offer** to A$179 / 379 / 599 and A$15 per extra vehicle, with migration done for the operator, a 60-day side-by-side run and refund, a written AU-hosting and export guarantee, and 10 founding places closing 31 March 2027. Get the guarantee wording checked against the Australian Consumer Law.
+5. **Open the founding program on 2 February 2027** through BusNSW, BusVic and QBIC plus depot visits with live imports. Measure deposits against the success line, and stop if the stop line is hit.
 
 ---
 
-## Appendix A: Sources
+## Appendix A: Founder pack files (all in `founder/`)
 
-**Government and industry**
-- TfNSW: [Applying for bus operator accreditation](https://www.transport.nsw.gov.au/operations/roads-and-waterways/business-and-industry/buses/operators/applying-for-bus-operator) · [Accreditation package v1.1 (June 2025)](https://www.transport.nsw.gov.au/system/files/media/documents/2025/bus-operator-accreditation-package-v1.1-june-2025.pdf) · [BOAS audit tool (Oct 2025)](https://www.transport.nsw.gov.au/system/files/media/documents/2025/boas-audit-tool-october-2025.pdf) · [BOAS guideline update](https://www.transport.nsw.gov.au/system/files/media/documents/2025/boas-guideline-update.pdf)
-- [Australian Bus Fleet Lists (TfNSW Open Data)](https://opendata.transport.nsw.gov.au/data/dataset/australian-bus-fleet-lists)
-- [BITRE Road Vehicles Australia Jan 2025](https://www.bitre.gov.au/sites/default/files/documents/BITRE-Road-vehicles-Australia-January-2025--september2025--pdf.pdf) (not openable from this session) · [Statista registered buses](https://statista.com/statistics/824830/australia-number-of-registered-buses)
-- [BusNSW About](https://busnsw.com.au/about-us/) · [BIC LCLF 2024 submission](https://infrastructure.gov.au/sites/default/files/documents/lclf2024-bus-industry-confederation.pdf) · [BIC FLCB 2026 submission](https://www.ntc.gov.au/system/files/webform/2026_flcb_submission/1946/BIC%20submission%20-%20FLCB%20consultation.pdf)
-- [Victoria Zero Emissions Bus plan](https://www.vic.gov.au/zero-emissions-bus-trial) · [Vic Bus Safety Regulations RIS](https://www.vic.gov.au/sites/default/files/2019-11/Bus-safety-Regulations-2010-RIS.pdf)
-- IBISWorld: [Interurban & Rural Bus – businesses](https://www.ibisworld.com/australia/number-of-businesses/interurban-and-rural-bus-transport/458) · [market size](https://www.ibisworld.com/australia/market-size/interurban-and-rural-bus-transport/458) · [industry](https://www.ibisworld.com/australia/industry/interurban-and-rural-bus-transport-in-australia/458/)
+`idea.md` · `board/brief.md`, `board/offers.md`, `board/monopoly.md`, `board/product.md`, `board.md` · `competitors.csv`, `competitors.md` · `customer.json`, `pitch-v1.md`, `pitch.md` · `panel/` (v1: cards, briefs, 20 answers, `results.md`) · `panel-v2/` (offer re-test) · `pricing-curve-starter.md`, `-growth.md`, `-fleet.md`, `pricing.md` · `offer.md` · `numbers.json`, `cfo.md`, `cfo-sources.md` · `marketing.md` · `brand.md` · `ops.md` · `launch.md` · `summary.md`, `business-plan.md`, `one-pager.md`.
 
-**Competitors**
-- [Coach Manager AU pricing](https://distinctive-systems.com/au/products/coach-manager/australian-pricing/) · [Distinctive Systems VMS AU pricing](https://distinctive-systems.com/au/products/vehicle-maintenance-system/australian-pricing/)
-- [eCoachManager price list](https://ecoachmanager.com/packages-price-list-nz/) · [eCoachManager AU cost article](https://ecoachmanager.com/e-coach-manager/ecoachmanager-understanding-fleet-software-costs-in-australia/)
-- [TransportMe](https://www.transportme.com.au) · [ABC Bus News on TransportMe](https://www.busnews.com.au/transportme-transit-management-system-brings-unique-perspective-to-fleet-management/)
-- [Busable](https://busable.app/about) · [RouteStra](https://www.capterra.com.au/software/1113395/RouteStra) · [Coach & Charter Manager](https://www.capterra.com.au/software/201842/coach-charter-manager) · [CIS-BUS Charter](https://www.capterra.com.au/software/1016965/cis-bus-charter) · [Sengerio](https://www.softwareadvice.com.au/software/166261/sengerio)
-- [Moovs AU](https://www.moovsapp.com/en-au/charter-bus-software) · [Moovs pricing (Capterra)](https://www.capterra.com/p/209139/moovs/pricing/) · [Busify](https://www.busify.com/) · [Busie](https://www.getbusie.com/) · [CoachRail (ITQlick)](https://www.itqlick.com/coachrail/pricing)
-- [BusMinder](https://apps.apple.com/app/id1364797036) · [RollCall](https://rollcall.com.au/bus-companies)
-- [Trapeze AU](https://trapezegroup.com.au/bus/planning-scheduling/) · [Optibus / Buslines](https://blog.optibus.com/buslines-brings-optibus-to-new-south-wales-australia-to-improve-public-transportation) · [GIRO / TransLink](https://www.metro-magazine.com/news/australias-translink-taps-giro-program-to-improve-service)
-- [Teletrac Navman review (ExpertMarket AU)](https://www.expertmarket.com/au/vehicle-tracking/teletrac-navman-review) · [EROAD pricing](https://eroad.com/?p=84) · [Fleetio pricing](https://fleetio.com/pricing) · [Samsara pricing (tech.co)](https://tech.co/fleet-management/samsara-fleet-management-review)
-- [BusCharter.com.au launch (AAP)](https://www.aap.com.au/aapreleases/globenewswire9727742/)
+## Appendix B: Sources
 
-**Operators**
-- [Kinetic](https://wearekinetic.com/) · [Kinetic Melbourne](https://en.wikipedia.org/wiki/Kinetic_Melbourne) · [Kinetic Townsville](https://en.wikipedia.org/wiki/Kinetic_Townsville) · [CDC Melbourne](https://en.wikipedia.org/wiki/CDC_Melbourne) · [CDC Ballarat](https://en.wikipedia.org/wiki/CDC_Ballarat) · [Transdev John Holland](https://en.wikipedia.org/wiki/Transdev_John_Holland) · [Transdev Melbourne](https://en.wikipedia.org/wiki/Transdev_Melbourne) · [Dysons](https://dysongroup.com.au/node/25)
-- [Kangaroo Bus Lines case (Telstra Purple)](https://purple.telstra.com.au/case-studies/delivering-a-superior-transport-experience-for-queensland)
-- Prospect links: see the table in Section 10.2.
+Government and industry: [TfNSW accreditation](https://www.transport.nsw.gov.au/operations/roads-and-waterways/business-and-industry/buses/operators/applying-for-bus-operator) · [BOAS audit tool Oct 2025](https://www.transport.nsw.gov.au/system/files/media/documents/2025/boas-audit-tool-october-2025.pdf) · [Accreditation package Jun 2025](https://www.transport.nsw.gov.au/system/files/media/documents/2025/bus-operator-accreditation-package-v1.1-june-2025.pdf) · [Australian Bus Fleet Lists](https://opendata.transport.nsw.gov.au/data/dataset/australian-bus-fleet-lists) · [BITRE Road Vehicles Jan 2025](https://www.bitre.gov.au/sites/default/files/documents/BITRE-Road-vehicles-Australia-January-2025--september2025--pdf.pdf) · [Statista registered buses](https://statista.com/statistics/824830/australia-number-of-registered-buses) · [BusNSW](https://busnsw.com.au/about-us/) · [BIC LCLF 2024](https://infrastructure.gov.au/sites/default/files/documents/lclf2024-bus-industry-confederation.pdf) · [IBISWorld businesses](https://www.ibisworld.com/australia/number-of-businesses/interurban-and-rural-bus-transport/458) · [IBISWorld market size](https://www.ibisworld.com/australia/market-size/interurban-and-rural-bus-transport/458) · [OAIC privacy guidance](https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies) · [ACCC consumer guarantees](https://www.accc.gov.au/business/consumer-rights-and-guarantees) · [ATO GST registration](https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/registering-for-gst)
 
-**Benchmarks and regulation**
-- [Tidemark 2025 Vertical SMB SaaS benchmarks](https://www.tidemarkcap.com/post/2025-vertical-smb-saas-benchmark-report) · [Kyle Poyar 2025 SaaS benchmarks](https://kylepoyar.substack.com/p/2025-saas-benchmarks-report) · [Stripe Vertical SaaS benchmark](https://stripe.com/nz/lp/vertical-saas-benchmark-2025)
-- [SmartCompany: Privacy Act small business exemption](https://www.smartcompany.com.au/business-advice/privacy-act-small-business-exemption-government-report/) · [IAPP](https://www.iapp.org/news/a/amending-australias-privacy-act-small-businesses-bigger-responsibilities)
+Competitors and reviews: see the links in Section 5 and `founder/competitors.csv`; plus [G2 Distinctive Systems](https://www.g2.com/sellers/distinctive-systems) · [featuredcustomers](https://www.featuredcustomers.com/vendor/distinctive-systems-ltd) · [G2 eCoachManager](https://www.g2.com/products/ecoachmanager/reviews) · [SoftwareFinder Moovs reviews](https://softwarefinder.com/fleet-management-software/moovs/reviews).
 
-## Appendix B: Label legend
+Benchmarks and regulation: [Tidemark](https://www.tidemarkcap.com/post/2025-vertical-smb-saas-benchmark-report) · [Kyle Poyar](https://kylepoyar.substack.com/p/2025-saas-benchmarks-report) · [SmartCompany](https://www.smartcompany.com.au/business-advice/privacy-act-small-business-exemption-government-report/) · [IAPP](https://www.iapp.org/news/a/amending-australias-privacy-act-small-businesses-bigger-responsibilities).
 
-**[V]** vendor or regulator primary page (seen through a search snippet) · **[V-vendor]** a claim the vendor makes about itself, not independently verified · **[S]** secondary or aggregator source · **[A]** assumption or estimate · **NPD** not publicly disclosed.
+Framework: [Jakeschincariol/founder-skill](https://github.com/Jakeschincariol/founder-skill) (MIT). The board lenses summarise published frameworks (*$100M Offers*, *Zero to One*, Isaacson's *Steve Jobs*). They are not those authors' words or endorsements.

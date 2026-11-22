@@ -1,0 +1,66 @@
+# Buyer panel: MA Transport (cloud transport management software for Australian bus and coach operators)
+
+**2 buy · 18 pass** (10% buy) out of 20 simulated buyers. Seed 2026, so the same cards can be dealt again.
+
+These are simulated buyers, not customers. Use this to find objections and weak spots, then confirm the big ones with real people before you spend.
+
+## By segment
+
+| group | buyers | buy rate |
+| --- | ---: | ---: |
+| Owner of a small charter/shuttle business with 3-5 vehicles (would be on the A$199 Starter plan) | 6 | 17%  (thin) |
+| Owner-manager of a 6-15 vehicle coach and charter business (would be on the A$399 Growth plan) | 9 | 11% |
+| Managing director of a 16-30 vehicle family coach company (would be on the A$699 Fleet plan) | 5 | 0%  (thin) |
+
+## By buying behaviour
+
+| group | buyers | buy rate |
+| --- | ---: | ---: |
+| Growth-minded operator | 3 | 67%  (thin) |
+| Cost-cutter | 3 | 0%  (thin) |
+| Spreadsheet and whiteboard loyalist | 5 | 0%  (thin) |
+| Asks other operators first | 3 | 0%  (thin) |
+| Compliance worrier | 2 | 0%  (thin) |
+| Locked in to an existing system | 4 | 0%  (thin) |
+
+## By income
+
+| group | buyers | buy rate |
+| --- | ---: | ---: |
+| under $108,000 | 6 | 17%  (thin) |
+| $108,000 to $166,000 | 7 | 14%  (thin) |
+| $166,000 and up | 7 | 0%  (thin) |
+
+## Why they pass
+
+| reason | buyers | in their words |
+| --- | ---: | --- |
+| habit | 10 | "Losing that regular over a double-booking still stings, so I get what this fixes, but my whiteboard, Excel and Xero work and I just don't have the hours to learn a new system and get the drivers using an app. A brand-new company with no other operators on it isn't something I'll bet my bookings on in a normal week." (P002) · "I already pay for a charter package that works well enough, and I've got years of quotes, customers and driver records in it. Free migration and a 60-day trial sound good, but I'm not swapping systems for a brand-new company with no customers, least of all in the middle of excursion and end-of-year season." (P006) |
+| trust | 7 | "Nobody I know is using it. It's a new company with no customers, and I don't put my bookings and drivers on anything until another operator at the association tells me it works. On top of that I haven't got the time to learn a new system and run two side by side for 60 days." (P003) · "After the audit I went through, my compliance records are the last thing I'll hand to a company with no customers at all. The export promise and the 60-day refund are nice, but I'd rather wait until a few other operators have been through an audit using it." (P005) |
+| price | 1 | "With four or five buses I can keep the bookings in my head, a diary and a spreadsheet, and Xero already does my invoices. A$179 a month, even at 30% off, is another two grand a year on top of fuel, insurance and wages, for a problem I don't really have at my size." (P001) |
+
+## Why they buy
+
+| reason | buyers | in their words |
+| --- | ---: | --- |
+| convenience | 1 | "I'm adding vehicles and taking booking calls from the driver's seat, so enquiry-to-Xero in one place with clash and expiry warnings is exactly where my admin is breaking. With them moving my data in for free and a 60-day money-back, about A$125 a month is a cheap bet to find out." (P004) |
+| need | 1 | "We're adding vehicles and contracts and the spreadsheets are already cracking, and the double-booking and expired-licence warnings are exactly the things that keep me up at night. With them moving my data in for free, 60 days running it side by side and my money back if it flops, I'd sign up as a founding operator, but only after a demo where I see the driver side on a phone." (P012) |
+
+## What would flip a no
+
+- An operator my size that I actually know telling me it caught a double-booking or an expired authority that would have cost me, and a price closer to A$60-80 a month for a 5-vehicle outfit.
+- Talking to another small charter operator like me who has run it for a few months and says it actually stopped the clashes without eating their evenings.
+- An operator I know, at the bus association or nearby, telling me they've run it for a few months and it actually saves them time.
+- Talking to two or three operators like me who have used it through a real accreditation audit, with the auditor accepting its records.
+- Talking to two or three other small coach operators in NSW or VIC who've run a full busy season on it, plus a demo where it quotes one of my real charters and passes an accreditation audit check, with the switch done in the quiet months after summer.
+- Seeing it running at another coach operator my size, ideally one I know or can ring, quoting real charters and getting through an accreditation audit without trouble.
+- A couple of operators my size I can actually ring who've run it through a peak season, plus a start date after the rush so the move happens in the quiet months.
+- Seeing two or three operators my size actually running it for six months or so, and my current provider jacking up their price or letting me down badly.
+- Hearing from another operator my size, say at the bus association regional meeting, who has run it through a busy season and found it clearly beats Coach Manager plus telematics, Xero invoicing included.
+- Hearing from two or three operators my size at the bus association meeting who've been running it for six months, and who say the migration and the drivers' phone app actually worked.
+- Seeing two or three operators my size actually running it for six months or more, with their drivers using the run sheets without complaint, and being able to ring one of those operators myself.
+- A coach operator I trust, running a fleet my size, telling me they've used it through a busy season and it held up, especially the double-booking blocks and the accreditation records.
+
+Buyers say they would buy **1.0 times** in the first month on average.
+
+20 buyers gave all four price answers. Run founder-pricing's van_westendorp.py on the answers folder.

@@ -1,0 +1,13 @@
+{
+  "id": "P015",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "What I've got now does the job well enough for my fleet, and I'm not adding another $400 a month on top of fuel, insurance and wages for a system nobody I know is using yet.",
+  "objection": "It's a brand-new company with zero customers. If I move all my bookings, drivers and maintenance records onto it and they fold or it falls over on a busy school-excursion morning, I'm the one wearing it.",
+  "would_change_my_mind": "Seeing a couple of operators my size from the bus association running it for six months, plus a free trial where they move my data over for me.",
+  "price_too_cheap": 50,
+  "price_cheap": 120,
+  "price_expensive": 250,
+  "price_too_expensive": 350
+}

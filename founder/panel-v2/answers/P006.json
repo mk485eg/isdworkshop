@@ -1,0 +1,13 @@
+{
+  "id": "P006",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "I already pay for a charter package that works well enough, and I've got years of quotes, customers and driver records in it. Free migration and a 60-day trial sound good, but I'm not swapping systems for a brand-new company with no customers, least of all in the middle of excursion and end-of-year season.",
+  "objection": "Nobody is using it yet. If the migration goes wrong or it can't handle a messy multi-day charter quote, I'm the one sorting out double-bookings with a school while I'm short a driver. Who's even going to answer the phone when something breaks?",
+  "would_change_my_mind": "Talking to two or three other small coach operators in NSW or VIC who've run a full busy season on it, plus a demo where it quotes one of my real charters and passes an accreditation audit check, with the switch done in the quiet months after summer.",
+  "price_too_cheap": 49,
+  "price_cheap": 110,
+  "price_expensive": 199,
+  "price_too_expensive": 290
+}

@@ -1,0 +1,13 @@
+{
+  "id": "P017",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "trust",
+  "reason": "Seven hundred dollars a month is real money when fuel, insurance and wages are already eating the margin, and I'm not putting every booking, customer and driver record into a brand-new outfit with no customers. If they fold in the middle of excursion season, I'm the one left stranded.",
+  "objection": "Is this a new company that could disappear and take my bookings and driver records with it, right when I can least afford the disruption?",
+  "would_change_my_mind": "A few other coach operators my size actually running on it, plus a written guarantee I can export all my data any time, and a free trial outside the busy season.",
+  "price_too_cheap": 150,
+  "price_cheap": 300,
+  "price_expensive": 550,
+  "price_too_expensive": 800
+}

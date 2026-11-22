@@ -1,0 +1,13 @@
+{
+  "id": "P003",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "trust",
+  "reason": "Nobody I know is using it. It's a new company with no customers, and I don't put my bookings and drivers on anything until another operator at the association tells me it works. On top of that I haven't got the time to learn a new system and run two side by side for 60 days.",
+  "objection": "No operator has vouched for it, so I'd be the guinea pig. If it falls over in the middle of school excursion season, it's my business that's stuffed, not theirs.",
+  "would_change_my_mind": "An operator I know, at the bus association or nearby, telling me they've run it for a few months and it actually saves them time.",
+  "price_too_cheap": 40,
+  "price_cheap": 90,
+  "price_expensive": 180,
+  "price_too_expensive": 280
+}

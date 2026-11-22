@@ -1,0 +1,13 @@
+{
+  "id": "P009",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "I've got years of bookings, customers and maintenance history sitting in the system I already pay for, and it does the job well enough. I'm not ripping that out for a brand new outfit with no customers just because it's in the cloud.",
+  "objection": "Moving all my data and retraining the drivers and office mid-season, onto software nobody else is running yet. If it falls over on a Friday with three weddings and a school excursion booked, it's my name on the line, not theirs.",
+  "would_change_my_mind": "If they migrated all my existing data across for free and I could talk to a few operators my size who'd been running it smoothly for six months or more.",
+  "price_too_cheap": 150,
+  "price_cheap": 350,
+  "price_expensive": 650,
+  "price_too_expensive": 900
+}

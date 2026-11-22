@@ -1,0 +1,13 @@
+{
+  "id": "P006",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "I already pay for a charter package that does my quoting and holds years of bookings and customer history. I'm not tearing that out for a brand-new company with no customers, especially heading into school excursion and end-of-year season.",
+  "objection": "Moving years of data for an unproven product. If the migration goes wrong or the company folds, I'm the one left scrambling with buses booked and no records. I also can't tell from this if it handles proper charter quoting and Australian accreditation, or if it's generic fleet software with a bus logo on it.",
+  "would_change_my_mind": "If they moved all my existing data across for free, ran it side by side with my current system through a quiet period, and showed me charter quoting and accreditation records working the way an Australian operator actually needs, with a couple of operators my size already on it.",
+  "price_too_cheap": 49,
+  "price_cheap": 120,
+  "price_expensive": 250,
+  "price_too_expensive": 350
+}

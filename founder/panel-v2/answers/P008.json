@@ -1,0 +1,13 @@
+{
+  "id": "P008",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "My spreadsheet, whiteboard and Xero work and cost me nothing extra, and I've never paid for ops software. Free migration is nice, but I'd still be checking two systems for 60 days while I'm taking calls and driving runs, and that's not happening in the busy months.",
+  "objection": "It's a brand-new company with no other operators using it. If it's buggy or they fold, I've moved my whole business onto it right when I can least afford a double-booking or a no-show driver.",
+  "would_change_my_mind": "A couple of operators my size I can actually ring who've run it through a peak season, plus a start date after the rush so the move happens in the quiet months.",
+  "price_too_cheap": 50,
+  "price_cheap": 120,
+  "price_expensive": 250,
+  "price_too_expensive": 400
+}

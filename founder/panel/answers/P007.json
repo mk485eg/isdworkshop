@@ -1,0 +1,13 @@
+{
+  "id": "P007",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "trust",
+  "reason": "I've run this business on Excel, the whiteboard and Xero for years without paying for software, and I'm not handing my bookings to a brand-new company with not one operator using it. Nearly five grand a year is real money for something nobody can vouch for.",
+  "objection": "Nothing on that page says it does charter quoting properly or knows anything about Australian accreditation and driver compliance - it reads generic, and if it falls over mid-season I'm the one taking the calls from the driver's seat with my bookings stuck in someone else's system.",
+  "would_change_my_mind": "Another independent coach operator my size, in my state, telling me it handles their charter quotes and accreditation records and that they got their data in from Excel without losing a week - plus a free trial and a way to pull my data back out.",
+  "price_too_cheap": 49,
+  "price_cheap": 120,
+  "price_expensive": 250,
+  "price_too_expensive": 400
+}
