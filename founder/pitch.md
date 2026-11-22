@@ -1,0 +1,6 @@
+MA Transport "Clash-Free Charter Desk": new cloud software for Australian charter and coach operators (3-30 vehicles), in a web browser and on drivers' phones.
+One job done well: an enquiry becomes a quote, then a booking with a vehicle and driver allocated, then a driver run sheet, then an invoice in Xero. It blocks double-bookings and warns before you allocate a driver or vehicle with an expired authority, licence or inspection, and keeps the records your accreditation audit asks for.
+Founding-operator offer, first 10 operators only, until 31 March 2027: we move your existing bookings, customers, vehicles and drivers in for you (from Excel or your current system) at no charge, and you can run it alongside your current system for 60 days.
+Price after that, in Australian dollars: Starter A$179/month (up to 5 vehicles), Growth A$379/month (up to 15), Fleet A$599/month (up to 30), extra vehicles A$15/month; founding operators get 30% off for the first 12 months, paid quarterly.
+Guarantees in writing: if you leave within the first 60 days you get your money back; your data is stored in Australia and you can export all of it to Excel at any time, including if the company closes.
+It is a new product from a new company; there are no existing customers yet.

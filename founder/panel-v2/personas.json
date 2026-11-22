@@ -1,0 +1,222 @@
+[
+ {
+  "id": "P001",
+  "name": "Mason",
+  "age": 66,
+  "segment": "Owner of a small charter/shuttle business with 3-5 vehicles (would be on the A$199 Starter plan)",
+  "income": 108000,
+  "behaviour": "Cost-cutter",
+  "behaviour_how": "Watches every monthly subscription; fuel, insurance and wages already squeeze the margin.",
+  "objection": "That's a lot per month on top of everything else I pay for",
+  "habit": "school excursion and end-of-year event season is your busiest time"
+ },
+ {
+  "id": "P002",
+  "name": "Elle",
+  "age": 32,
+  "segment": "Owner of a small charter/shuttle business with 3-5 vehicles (would be on the A$199 Starter plan)",
+  "income": 76000,
+  "behaviour": "Spreadsheet and whiteboard loyalist",
+  "behaviour_how": "Runs bookings, rosters and invoices in Excel, a whiteboard and Xero; has never paid for operations software.",
+  "objection": "I don't have time to learn new software",
+  "habit": "a double-booking last year cost you a regular client"
+ },
+ {
+  "id": "P003",
+  "name": "Dana",
+  "age": 40,
+  "segment": "Owner of a small charter/shuttle business with 3-5 vehicles (would be on the A$199 Starter plan)",
+  "income": 87000,
+  "behaviour": "Asks other operators first",
+  "behaviour_how": "Will not buy anything until a peer at the bus association or a nearby operator vouches for it.",
+  "objection": "I don't have time to learn new software",
+  "habit": "your vehicles already have GPS trackers from a telematics provider"
+ },
+ {
+  "id": "P004",
+  "name": "Noah",
+  "age": 40,
+  "segment": "Owner of a small charter/shuttle business with 3-5 vehicles (would be on the A$199 Starter plan)",
+  "income": 108000,
+  "behaviour": "Growth-minded operator",
+  "behaviour_how": "Adding vehicles and contracts, feels the admin outgrowing the current setup, open to new tools.",
+  "objection": "Coach Manager or my telematics already does half of this for less",
+  "habit": "you take booking calls yourself while also driving a run some days"
+ },
+ {
+  "id": "P005",
+  "name": "Ana",
+  "age": 58,
+  "segment": "Owner-manager of a 6-15 vehicle coach and charter business (would be on the A$399 Growth plan)",
+  "income": 150000,
+  "behaviour": "Compliance worrier",
+  "behaviour_how": "Had a stressful accreditation audit or incident and wants records that would stand up to scrutiny.",
+  "objection": "Is this a brand-new company that might disappear and take my data with it?",
+  "habit": "your vehicles already have GPS trackers from a telematics provider"
+ },
+ {
+  "id": "P006",
+  "name": "Nadia",
+  "age": 51,
+  "segment": "Owner of a small charter/shuttle business with 3-5 vehicles (would be on the A$199 Starter plan)",
+  "income": 85000,
+  "behaviour": "Locked in to an existing system",
+  "behaviour_how": "Already pays for a charter or dispatch package (such as Coach Manager or eCoachManager) and dreads moving years of data.",
+  "objection": "Will it actually handle charter quoting and Australian accreditation, or is it generic?",
+  "habit": "school excursion and end-of-year event season is your busiest time"
+ },
+ {
+  "id": "P007",
+  "name": "Isla",
+  "age": 65,
+  "segment": "Owner-manager of a 6-15 vehicle coach and charter business (would be on the A$399 Growth plan)",
+  "income": 163000,
+  "behaviour": "Spreadsheet and whiteboard loyalist",
+  "behaviour_how": "Runs bookings, rosters and invoices in Excel, a whiteboard and Xero; has never paid for operations software.",
+  "objection": "Will it actually handle charter quoting and Australian accreditation, or is it generic?",
+  "habit": "you take booking calls yourself while also driving a run some days"
+ },
+ {
+  "id": "P008",
+  "name": "Tariq",
+  "age": 38,
+  "segment": "Owner-manager of a 6-15 vehicle coach and charter business (would be on the A$399 Growth plan)",
+  "income": 125000,
+  "behaviour": "Spreadsheet and whiteboard loyalist",
+  "behaviour_how": "Runs bookings, rosters and invoices in Excel, a whiteboard and Xero; has never paid for operations software.",
+  "objection": "Moving all my bookings, drivers and vehicle history across sounds like a nightmare in peak season",
+  "habit": "you take booking calls yourself while also driving a run some days"
+ },
+ {
+  "id": "P009",
+  "name": "Caleb",
+  "age": 54,
+  "segment": "Managing director of a 16-30 vehicle family coach company (would be on the A$699 Fleet plan)",
+  "income": 218000,
+  "behaviour": "Locked in to an existing system",
+  "behaviour_how": "Already pays for a charter or dispatch package (such as Coach Manager or eCoachManager) and dreads moving years of data.",
+  "objection": "I already have something that works well enough",
+  "habit": "you take booking calls yourself while also driving a run some days"
+ },
+ {
+  "id": "P010",
+  "name": "Freya",
+  "age": 64,
+  "segment": "Owner-manager of a 6-15 vehicle coach and charter business (would be on the A$399 Growth plan)",
+  "income": 133000,
+  "behaviour": "Growth-minded operator",
+  "behaviour_how": "Adding vehicles and contracts, feels the admin outgrowing the current setup, open to new tools.",
+  "objection": "Coach Manager or my telematics already does half of this for less",
+  "habit": "you go to the state bus association's regional meetings once or twice a year"
+ },
+ {
+  "id": "P011",
+  "name": "Sara",
+  "age": 52,
+  "segment": "Owner-manager of a 6-15 vehicle coach and charter business (would be on the A$399 Growth plan)",
+  "income": 172000,
+  "behaviour": "Locked in to an existing system",
+  "behaviour_how": "Already pays for a charter or dispatch package (such as Coach Manager or eCoachManager) and dreads moving years of data.",
+  "objection": "I don't have time to learn new software",
+  "habit": "you go to the state bus association's regional meetings once or twice a year"
+ },
+ {
+  "id": "P012",
+  "name": "Aria",
+  "age": 42,
+  "segment": "Owner-manager of a 6-15 vehicle coach and charter business (would be on the A$399 Growth plan)",
+  "income": 104000,
+  "behaviour": "Growth-minded operator",
+  "behaviour_how": "Adding vehicles and contracts, feels the admin outgrowing the current setup, open to new tools.",
+  "objection": "My drivers are not tech people; they won't use another app",
+  "habit": "you go to the state bus association's regional meetings once or twice a year"
+ },
+ {
+  "id": "P013",
+  "name": "Jordan",
+  "age": 53,
+  "segment": "Owner-manager of a 6-15 vehicle coach and charter business (would be on the A$399 Growth plan)",
+  "income": 131000,
+  "behaviour": "Locked in to an existing system",
+  "behaviour_how": "Already pays for a charter or dispatch package (such as Coach Manager or eCoachManager) and dreads moving years of data.",
+  "objection": "My drivers are not tech people; they won't use another app",
+  "habit": "a double-booking last year cost you a regular client"
+ },
+ {
+  "id": "P014",
+  "name": "Rafael",
+  "age": 36,
+  "segment": "Managing director of a 16-30 vehicle family coach company (would be on the A$699 Fleet plan)",
+  "income": 206000,
+  "behaviour": "Asks other operators first",
+  "behaviour_how": "Will not buy anything until a peer at the bus association or a nearby operator vouches for it.",
+  "objection": "I already have something that works well enough",
+  "habit": "school excursion and end-of-year event season is your busiest time"
+ },
+ {
+  "id": "P015",
+  "name": "Liam",
+  "age": 43,
+  "segment": "Owner-manager of a 6-15 vehicle coach and charter business (would be on the A$399 Growth plan)",
+  "income": 94000,
+  "behaviour": "Cost-cutter",
+  "behaviour_how": "Watches every monthly subscription; fuel, insurance and wages already squeeze the margin.",
+  "objection": "I already have something that works well enough",
+  "habit": "you go to the state bus association's regional meetings once or twice a year"
+ },
+ {
+  "id": "P016",
+  "name": "Sofia",
+  "age": 44,
+  "segment": "Managing director of a 16-30 vehicle family coach company (would be on the A$699 Fleet plan)",
+  "income": 198000,
+  "behaviour": "Spreadsheet and whiteboard loyalist",
+  "behaviour_how": "Runs bookings, rosters and invoices in Excel, a whiteboard and Xero; has never paid for operations software.",
+  "objection": "I already have something that works well enough",
+  "habit": "school excursion and end-of-year event season is your busiest time"
+ },
+ {
+  "id": "P017",
+  "name": "Poppy",
+  "age": 65,
+  "segment": "Managing director of a 16-30 vehicle family coach company (would be on the A$699 Fleet plan)",
+  "income": 166000,
+  "behaviour": "Cost-cutter",
+  "behaviour_how": "Watches every monthly subscription; fuel, insurance and wages already squeeze the margin.",
+  "objection": "Is this a brand-new company that might disappear and take my data with it?",
+  "habit": "school excursion and end-of-year event season is your busiest time"
+ },
+ {
+  "id": "P018",
+  "name": "Yara",
+  "age": 43,
+  "segment": "Managing director of a 16-30 vehicle family coach company (would be on the A$699 Fleet plan)",
+  "income": 187000,
+  "behaviour": "Compliance worrier",
+  "behaviour_how": "Had a stressful accreditation audit or incident and wants records that would stand up to scrutiny.",
+  "objection": "Will it actually handle charter quoting and Australian accreditation, or is it generic?",
+  "habit": "your vehicles already have GPS trackers from a telematics provider"
+ },
+ {
+  "id": "P019",
+  "name": "Lena",
+  "age": 58,
+  "segment": "Owner-manager of a 6-15 vehicle coach and charter business (would be on the A$399 Growth plan)",
+  "income": 168000,
+  "behaviour": "Asks other operators first",
+  "behaviour_how": "Will not buy anything until a peer at the bus association or a nearby operator vouches for it.",
+  "objection": "Will it actually handle charter quoting and Australian accreditation, or is it generic?",
+  "habit": "your office manager does the invoicing in Xero on Fridays"
+ },
+ {
+  "id": "P020",
+  "name": "Pablo",
+  "age": 43,
+  "segment": "Owner of a small charter/shuttle business with 3-5 vehicles (would be on the A$199 Starter plan)",
+  "income": 77000,
+  "behaviour": "Spreadsheet and whiteboard loyalist",
+  "behaviour_how": "Runs bookings, rosters and invoices in Excel, a whiteboard and Xero; has never paid for operations software.",
+  "objection": "Coach Manager or my telematics already does half of this for less",
+  "habit": "you go to the state bus association's regional meetings once or twice a year"
+ }
+]

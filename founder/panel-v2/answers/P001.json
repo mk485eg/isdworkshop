@@ -1,0 +1,13 @@
+{
+  "id": "P001",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "price",
+  "reason": "With four or five buses I can keep the bookings in my head, a diary and a spreadsheet, and Xero already does my invoices. A$179 a month, even at 30% off, is another two grand a year on top of fuel, insurance and wages, for a problem I don't really have at my size.",
+  "objection": "It's a brand-new outfit with no other operators using it. I'm not handing my bookings and drivers' details to someone who might not be around in two years, and I'm certainly not learning new software in the middle of excursion and end-of-year season.",
+  "would_change_my_mind": "An operator my size that I actually know telling me it caught a double-booking or an expired authority that would have cost me, and a price closer to A$60-80 a month for a 5-vehicle outfit.",
+  "price_too_cheap": 15,
+  "price_cheap": 50,
+  "price_expensive": 99,
+  "price_too_expensive": 150
+}

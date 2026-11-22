@@ -1,0 +1,13 @@
+{
+  "id": "P010",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "trust",
+  "reason": "The admin is getting away from me as we grow, and the free move-in and 60-day trial are tempting. But I'm not putting my bookings and driver compliance on software nobody else is running yet, when Coach Manager and my telematics already cover a good part of it.",
+  "objection": "A new company with no customers. If it falls over halfway through a school excursion season, or they fold in a year, I've had all the upheaval for nothing, and the Excel export won't fix that.",
+  "would_change_my_mind": "Hearing from another operator my size, say at the bus association regional meeting, who has run it through a busy season and found it clearly beats Coach Manager plus telematics, Xero invoicing included.",
+  "price_too_cheap": 80,
+  "price_cheap": 150,
+  "price_expensive": 350,
+  "price_too_expensive": 550
+}

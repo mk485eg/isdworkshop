@@ -1,0 +1,13 @@
+{
+  "id": "P004",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "trust",
+  "reason": "I do need something better as I add buses, but I'm not moving all my bookings, quotes and driver records onto a brand-new company with zero customers. If it falls over on a Saturday wedding run while I'm behind the wheel, that's my reputation, not theirs.",
+  "objection": "Coach Manager or my telematics already does half of this for less, and nobody's actually running a fleet on this yet. Switching is weeks of my evenings re-entering data for a product that might not be around in two years.",
+  "would_change_my_mind": "A free month or two with them loading my existing data for me, plus a couple of other small operators I can ring who are actually using it day to day.",
+  "price_too_cheap": 49,
+  "price_cheap": 99,
+  "price_expensive": 199,
+  "price_too_expensive": 300
+}

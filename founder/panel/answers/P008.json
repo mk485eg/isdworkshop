@@ -1,0 +1,13 @@
+{
+  "id": "P008",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "My spreadsheet, the whiteboard and Xero do the job and cost me next to nothing, so I'm not paying four hundred a month to move everything over, least of all to a company with zero customers.",
+  "objection": "Moving every booking, driver and vehicle record across while I'm on the phones and driving runs myself sounds like a nightmare. If this new outfit folds or the app falls over mid-season, my whole schedule goes with it.",
+  "would_change_my_mind": "If they migrated all my existing spreadsheets for me in the quiet season, gave me a free first few months, and I could talk to another coach operator my size already running on it.",
+  "price_too_cheap": 49,
+  "price_cheap": 120,
+  "price_expensive": 250,
+  "price_too_expensive": 400
+}

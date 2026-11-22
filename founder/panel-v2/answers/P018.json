@@ -1,0 +1,13 @@
+{
+  "id": "P018",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "trust",
+  "reason": "After the audit we went through, our compliance records are the last thing I'll hand to a brand-new company with no customers. The free migration and the 60-day parallel run are fair, but I'm not going to be their first test case.",
+  "objection": "It says it 'keeps the records your accreditation audit asks for', but nobody has been through an audit with it yet. If an auditor rejects what it produces, or the company folds halfway through the year, I'm the one exposed, and a spreadsheet export won't save me.",
+  "would_change_my_mind": "Seeing it map field by field to our state's accreditation requirements, ideally checked by an auditor or our industry association, plus a couple of other coach operators I can call who have actually used it through an audit.",
+  "price_too_cheap": 150,
+  "price_cheap": 300,
+  "price_expensive": 550,
+  "price_too_expensive": 800
+}

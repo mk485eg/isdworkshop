@@ -1,0 +1,13 @@
+{
+  "id": "P018",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "trust",
+  "reason": "After the audit we went through, I'm not putting our maintenance and driver records into software from a brand-new company with no customers. Nothing in this says it was built for Australian accreditation or that it works with the GPS trackers we already pay for.",
+  "objection": "Would these records actually stand up in an accreditation audit, or is it a generic booking tool with an Aussie price tag? And if the company folds in a year, what happens to my compliance history?",
+  "would_change_my_mind": "Seeing it map maintenance and driver records to accreditation requirements in my state, with export-ready audit reports, plus a couple of operators like us who've used it through an audit.",
+  "price_too_cheap": 150,
+  "price_cheap": 350,
+  "price_expensive": 650,
+  "price_too_expensive": 900
+}

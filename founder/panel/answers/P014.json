@@ -1,0 +1,13 @@
+{
+  "id": "P014",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "trust",
+  "reason": "What I run now does the job well enough, and I'm not moving my bookings, drivers and maintenance records onto something brand new that nobody I know has used. Least of all in the middle of excursion and end-of-year season.",
+  "objection": "Nobody's using it yet. No operator at the association can tell me it holds up on a busy Friday with all the buses out, and if it falls over or the company folds, that's my business and my records gone.",
+  "would_change_my_mind": "A couple of operators my size at the bus association running it for a season and telling me straight that it's better than what I've got.",
+  "price_too_cheap": 150,
+  "price_cheap": 350,
+  "price_expensive": 650,
+  "price_too_expensive": 1000
+}

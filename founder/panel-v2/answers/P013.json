@@ -1,0 +1,13 @@
+{
+  "id": "P013",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "I already pay for a charter package with years of bookings and customers in it, and I'm not ripping that out for a brand-new company with no other operators on it. The double-booking last year hurt, but the answer is probably tightening how we use what we've got, not starting over.",
+  "objection": "My drivers are not tech people and they won't use another app on their phones. On top of that it's a new outfit with zero customers. If they fold in a year, an Excel export doesn't run my business, so I'd be migrating twice.",
+  "would_change_my_mind": "Seeing two or three operators my size actually running it for six months or more, with their drivers using the run sheets without complaint, and being able to ring one of those operators myself.",
+  "price_too_cheap": 80,
+  "price_cheap": 200,
+  "price_expensive": 350,
+  "price_too_expensive": 500
+}

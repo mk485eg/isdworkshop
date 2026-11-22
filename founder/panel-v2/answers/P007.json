@@ -1,0 +1,13 @@
+{
+  "id": "P007",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "My whiteboard, Excel and Xero have run this business for years without a monthly bill, and I don't have the spare hours between booking calls and driving runs to learn a new system and chase my drivers onto an app. The free move-in and 60-day trial are decent, but I'd still have to change how I work, and nothing is broken badly enough to make me do that.",
+  "objection": "It's a brand-new company with not one operator using it yet. I'd be the guinea pig, and if it can't really cope with how I quote charters, or it folds in a year, I've wasted my time and I'm back to the whiteboard anyway.",
+  "would_change_my_mind": "Seeing it running at another coach operator my size, ideally one I know or can ring, quoting real charters and getting through an accreditation audit without trouble.",
+  "price_too_cheap": 40,
+  "price_cheap": 120,
+  "price_expensive": 250,
+  "price_too_expensive": 400
+}

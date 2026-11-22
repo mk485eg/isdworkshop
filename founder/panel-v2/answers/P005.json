@@ -1,0 +1,13 @@
+{
+  "id": "P005",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "trust",
+  "reason": "After the audit I went through, my compliance records are the last thing I'll hand to a company with no customers at all. The export promise and the 60-day refund are nice, but I'd rather wait until a few other operators have been through an audit using it.",
+  "objection": "If they fold, an Excel dump doesn't help me. I need to show an auditor proper records of driver authorities and vehicle inspections, and I'd be back to rebuilding everything in the middle of a busy season. It also says nothing about working with the GPS trackers I already pay for.",
+  "would_change_my_mind": "Talking to two or three operators like me who have used it through a real accreditation audit, with the auditor accepting its records.",
+  "price_too_cheap": 99,
+  "price_cheap": 199,
+  "price_expensive": 450,
+  "price_too_expensive": 650
+}

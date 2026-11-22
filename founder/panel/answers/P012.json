@@ -1,0 +1,13 @@
+{
+  "id": "P012",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "trust",
+  "reason": "I do need something better than what we've got now that we're adding buses and contracts, but I'm not putting my bookings and driver records into a brand-new system nobody else is using yet. If it goes belly-up or falls over on a busy school excursion week, I'm the one cleaning up the mess.",
+  "objection": "My drivers aren't tech people and they won't use another app, and with no other operators on it I've got no one to ask whether it actually works in a real depot.",
+  "would_change_my_mind": "A free trial on a few of my buses, plus hearing from a couple of operators my size at the bus association meeting that their drivers actually use it.",
+  "price_too_cheap": 79,
+  "price_cheap": 199,
+  "price_expensive": 450,
+  "price_too_expensive": 650
+}

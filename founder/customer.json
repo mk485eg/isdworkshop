@@ -1,0 +1,37 @@
+{
+ "business": "MA Transport (cloud transport management software for Australian bus and coach operators)",
+ "target": "Owner-managers of independent Australian bus, coach and charter businesses running about 3 to 30 vehicles (charter, school excursions, corporate, weddings, shuttles), mostly in NSW, VIC and QLD",
+ "where": "Australia (east coast first)",
+ "age": [32, 66],
+ "segments": [
+  {"name": "Owner of a small charter/shuttle business with 3-5 vehicles (would be on the A$199 Starter plan)", "share": 0.30, "income": [60000, 110000]},
+  {"name": "Owner-manager of a 6-15 vehicle coach and charter business (would be on the A$399 Growth plan)", "share": 0.45, "income": [90000, 180000]},
+  {"name": "Managing director of a 16-30 vehicle family coach company (would be on the A$699 Fleet plan)", "share": 0.25, "income": [140000, 260000]}
+ ],
+ "behaviours": [
+  {"name": "Spreadsheet and whiteboard loyalist", "share": 0.25, "how": "Runs bookings, rosters and invoices in Excel, a whiteboard and Xero; has never paid for operations software."},
+  {"name": "Locked in to an existing system", "share": 0.20, "how": "Already pays for a charter or dispatch package (such as Coach Manager or eCoachManager) and dreads moving years of data."},
+  {"name": "Asks other operators first", "share": 0.15, "how": "Will not buy anything until a peer at the bus association or a nearby operator vouches for it."},
+  {"name": "Cost-cutter", "share": 0.15, "how": "Watches every monthly subscription; fuel, insurance and wages already squeeze the margin."},
+  {"name": "Growth-minded operator", "share": 0.15, "how": "Adding vehicles and contracts, feels the admin outgrowing the current setup, open to new tools."},
+  {"name": "Compliance worrier", "share": 0.10, "how": "Had a stressful accreditation audit or incident and wants records that would stand up to scrutiny."}
+ ],
+ "objections": [
+  "I already have something that works well enough",
+  "Moving all my bookings, drivers and vehicle history across sounds like a nightmare in peak season",
+  "Is this a brand-new company that might disappear and take my data with it?",
+  "My drivers are not tech people; they won't use another app",
+  "Coach Manager or my telematics already does half of this for less",
+  "That's a lot per month on top of everything else I pay for",
+  "Will it actually handle charter quoting and Australian accreditation, or is it generic?",
+  "I don't have time to learn new software"
+ ],
+ "habits": [
+  "you take booking calls yourself while also driving a run some days",
+  "school excursion and end-of-year event season is your busiest time",
+  "your office manager does the invoicing in Xero on Fridays",
+  "you go to the state bus association's regional meetings once or twice a year",
+  "your vehicles already have GPS trackers from a telematics provider",
+  "a double-booking last year cost you a regular client"
+ ]
+}
